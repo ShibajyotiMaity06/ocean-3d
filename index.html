@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OceanView 3D - INCOIS Ocean Data Visualization</title>
+    <!-- Ocean Trident Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/trident-favicon.svg" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Three.js Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Header Navigation & Telemetry Brand -->
+    <header class="app-header glass-panel">
+      <!-- Animated Swimming Ocean Wildlife Tank (Whales, Sharks, Dolphins, Manta Ray & Tuna) -->
+      <div class="header-fish-tank" aria-hidden="true">
+        
+        <!-- 1. Giant Blue Whale (Swimming Right Forward) -->
+        <div class="swimming-creature creature-blue-whale">
+          <svg viewBox="0 0 90 36" class="creature-svg">
+            <!-- Whale Body (Tail left, Head right) -->
+            <path class="whale-body" d="M 12,18 Q 35,6 75,12 Q 88,16 88,21 Q 84,28 65,28 Q 35,30 12,18 Z" fill="#2a6f97" />
+            <!-- Underbelly Pleats -->
+            <path d="M 45,26 Q 62,27 75,22 Q 62,29 45,26 Z" fill="#61a5c2" opacity="0.7"/>
+            <!-- Pectoral Fin -->
+            <path d="M 52,24 Q 46,33 38,34 Q 44,28 50,22 Z" fill="#1b4965" />
+            <!-- Small Dorsal Fin -->
+            <polygon points="28,9 34,7 32,12" fill="#1b4965" />
+            <!-- Tail Fluke (Oscillates) -->
+            <path class="whale-tail" d="M 14,18 L 3,8 Q 6,18 2,28 L 14,18 Z" fill="#1b4965" />
+            <!-- Eye -->
+            <circle cx="78" cy="18" r="1.3" fill="#ffffff" />
+            <circle cx="78.5" cy="18" r="0.7" fill="#012a4a" />
+            <!-- Blowhole Mist Spout -->
+            <ellipse cx="72" cy="7" rx="3" ry="1.5" fill="#e0f2fe" opacity="0.6" class="whale-spout"/>
+          </svg>
+        </div>
+
+        <!-- 2. Great White / Reef Shark (Swimming Right Forward) -->
+        <div class="swimming-creature creature-shark">
+          <svg viewBox="0 0 65 30" class="creature-svg">
+            <!-- Shark Body (Tail left, Sharp Snout right) -->
+            <path d="M 12,15 Q 30,7 52,12 Q 63,14 62,16 Q 52,23 35,22 Q 22,21 12,15 Z" fill="#475569" />
+            <!-- Shark Underbelly White -->
+            <path d="M 28,19 Q 45,21 58,16 Q 45,23 28,19 Z" fill="#f8fafc" opacity="0.85"/>
+            <!-- Iconic Triangular Dorsal Fin -->
+            <polygon points="32,8 39,1 42,9" fill="#334155" />
+            <!-- Pectoral Fin -->
+            <polygon points="40,19 32,28 35,18" fill="#334155" />
+            <!-- Gill Slits -->
+            <line x1="44" y1="13" x2="44" y2="18" stroke="#334155" stroke-width="0.8"/>
+            <line x1="46" y1="13" x2="46" y2="18" stroke="#334155" stroke-width="0.8"/>
+            <!-- Shark Tail Fin (Caudal) -->
+            <path class="shark-tail" d="M 14,15 L 3,4 Q 8,15 2,26 L 14,15 Z" fill="#334155" />
+            <!-- Sharp Eye -->
+            <circle cx="56" cy="14" r="1.2" fill="#000000" />
+          </svg>
+        </div>
+
+        <!-- 3. Killer Whale / Orca (Swimming Left Forward) -->
+        <div class="swimming-creature creature-orca">
+          <svg viewBox="0 0 65 30" class="creature-svg">
+            <!-- Orca Body (Tail right, Snout left because scaleX(-1) handles left swimming) -->
+            <path d="M 12,15 Q 32,6 55,13 Q 63,16 62,19 Q 48,25 32,24 Q 20,22 12,15 Z" fill="#0f172a" />
+            <!-- White Eye Patch & Saddle -->
+            <ellipse cx="52" cy="13" rx="4" ry="2" fill="#ffffff" transform="rotate(-10 52 13)" />
+            <path d="M 28,19 Q 42,22 55,18 Q 42,25 28,19 Z" fill="#ffffff" />
+            <!-- Tall Orca Dorsal Fin -->
+            <polygon points="30,8 33,0 37,9" fill="#020617" />
+            <!-- Orca Tail -->
+            <path class="orca-tail" d="M 14,15 L 3,6 Q 7,15 3,24 L 14,15 Z" fill="#020617" />
+            <!-- Eye -->
+            <circle cx="55" cy="15" r="1.1" fill="#0f172a" />
+          </svg>
+        </div>
+
+        <!-- 4. Playful Dolphin (Swimming Right Forward with Porpoising Dive) -->
+        <div class="swimming-creature creature-dolphin">
+          <svg viewBox="0 0 52 24" class="creature-svg">
+            <!-- Curved Dolphin Body & Beak (Head right) -->
+            <path d="M 10,12 Q 25,4 42,9 Q 50,11 48,13 Q 40,18 28,17 Q 18,16 10,12 Z" fill="#0ea5e9" />
+            <path d="M 24,14 Q 35,16 44,12 Q 35,18 24,14 Z" fill="#e0f2fe" opacity="0.8"/>
+            <!-- Curved Dorsal Fin -->
+            <path d="M 26,6 Q 30,1 33,6 Z" fill="#0284c7" />
+            <!-- Pectoral Fluke -->
+            <polygon points="32,14 26,20 29,13" fill="#0284c7" />
+            <!-- Dolphin Fluke Tail -->
+            <path class="dolphin-tail" d="M 11,12 L 2,6 Q 6,12 2,18 L 11,12 Z" fill="#0284c7" />
+            <circle cx="43" cy="10.5" r="1.1" fill="#0369a1" />
+          </svg>
+        </div>
+
+        <!-- 5. Manta Ray (Gliding Left Forward) -->
+        <div class="swimming-creature creature-manta">
+          <svg viewBox="0 0 50 30" class="creature-svg">
+            <!-- Manta Diamond Wings -->
+            <path class="manta-wings" d="M 45,15 Q 26,1 18,3 Q 26,15 15,15 Q 26,15 18,27 Q 26,29 45,15 Z" fill="#1e293b" />
+            <!-- White Markings -->
+            <path d="M 38,12 Q 30,6 26,7 Q 32,13 38,12 Z" fill="#38bdf8" opacity="0.6"/>
+            <path d="M 38,18 Q 30,24 26,23 Q 32,17 38,18 Z" fill="#38bdf8" opacity="0.6"/>
+            <!-- Whip Tail -->
+            <line x1="15" y1="15" x2="2" y2="15" stroke="#0f172a" stroke-width="1.2" stroke-linecap="round"/>
+            <!-- Cephalic Fins (Head Right) -->
+            <path d="M 43,12 Q 49,11 47,14" stroke="#00e5ff" stroke-width="1.2" fill="none"/>
+            <path d="M 43,18 Q 49,19 47,16" stroke="#00e5ff" stroke-width="1.2" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- 6. School of 3 Yellowfin Tuna (Swimming Right Forward) -->
+        <div class="swimming-creature creature-tuna-school">
+          <!-- Tuna Leader -->
+          <svg viewBox="0 0 42 20" class="tuna-svg tuna-lead">
+            <path d="M 8,10 Q 20,3 36,9 Q 40,10 36,11 Q 20,17 8,10 Z" fill="#0284c7" />
+            <polygon points="22,3 28,1 27,5" fill="#facc15" />
+            <polygon points="22,17 28,19 27,15" fill="#facc15" />
+            <path class="tuna-tail" d="M 9,10 L 2,4 Q 5,10 2,16 L 9,10 Z" fill="#facc15" />
+            <circle cx="34" cy="9" r="1.1" fill="#ffffff" />
+            <circle cx="34.5" cy="9" r="0.6" fill="#000000" />
+          </svg>
+          <!-- Tuna Companion 1 -->
+          <svg viewBox="0 0 34 16" class="tuna-svg tuna-sub1">
+            <path d="M 7,8 Q 16,2 29,7 Q 32,8 29,9 Q 16,14 7,8 Z" fill="#0369a1" />
+            <polygon points="17,2 22,0 21,4" fill="#facc15" />
+            <polygon points="17,14 22,16 21,12" fill="#facc15" />
+            <path class="tuna-tail" d="M 8,8 L 2,3 Q 4,8 2,13 L 8,8 Z" fill="#facc15" />
+            <circle cx="27" cy="7" r="0.9" fill="#ffffff" />
+          </svg>
+          <!-- Tuna Companion 2 -->
+          <svg viewBox="0 0 30 14" class="tuna-svg tuna-sub2">
+            <path d="M 6,7 Q 14,2 26,6 Q 29,7 26,8 Q 14,12 6,7 Z" fill="#0284c7" />
+            <polygon points="15,2 19,1 18,4" fill="#facc15" />
+            <path class="tuna-tail" d="M 7,7 L 2,3 Q 4,7 2,11 L 7,7 Z" fill="#facc15" />
+            <circle cx="24" cy="6" r="0.8" fill="#ffffff" />
+          </svg>
+        </div>
+
+        <!-- 7. Vibrant Orange Clownfish (Swimming Right Forward) -->
+        <div class="swimming-creature creature-clownfish">
+          <svg viewBox="0 0 32 18" class="creature-svg">
+            <path d="M 7,9 Q 16,2 27,8 Q 30,9 27,10 Q 16,16 7,9 Z" fill="#ff7a00" />
+            <!-- White Vertical Bands -->
+            <path d="M 13,4 Q 15,9 13,14" stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            <path d="M 21,5 Q 23,9 21,13" stroke="#ffffff" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <path class="clown-tail" d="M 8,9 L 2,4 Q 5,9 2,14 L 8,9 Z" fill="#ff9f1c" />
+            <circle cx="25" cy="8" r="1.1" fill="#ffffff" />
+            <circle cx="25.5" cy="8" r="0.6" fill="#000000" />
+          </svg>
+        </div>
+
+        <!-- 8. Electric Neon Damselfish (Swimming Left Forward) -->
+        <div class="swimming-creature creature-damselfish">
+          <svg viewBox="0 0 26 14" class="creature-svg">
+            <path d="M 6,7 Q 13,1 22,6 Q 25,7 22,8 Q 13,13 6,7 Z" fill="#00f0ff" />
+            <path class="damself-tail" d="M 7,7 L 2,2 Q 4,7 2,12 L 7,7 Z" fill="#00b4d8" />
+            <circle cx="20" cy="6" r="1.0" fill="#ffffff" />
+            <circle cx="20.4" cy="6" r="0.5" fill="#000000" />
+          </svg>
+        </div>
+
+        <!-- Rising Ambient Micro-Bubbles -->
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+        <div class="bubble bubble-4"></div>
+        <div class="bubble bubble-5"></div>
+      </div>
+
+      <div class="brand-section">
+        <div class="logo-mark">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 12c3-4 6-4 9 0s6 4 9 0" stroke="#00e5ff"/>
+            <path d="M2 17c3-4 6-4 9 0s6 4 9 0" stroke="#38bdf8"/>
+            <path d="M2 7c3-4 6-4 9 0s6 4 9 0" stroke="#ff9f1c"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="app-title">OceanView <span class="highlight">3D</span></h1>
+          <p class="app-subtitle">INCOIS / MoES SIH26067 Oceanographic Hydrodynamics</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <!-- Poseidon / Aquaman Sea-King Emblem -->
+        <div class="poseidon-badge">
+          <svg class="poseidon-avatar" viewBox="0 0 32 32" width="22" height="22" fill="none">
+            <!-- Aura Halo -->
+            <circle cx="16" cy="16" r="14" fill="rgba(0, 229, 255, 0.15)" stroke="#00e5ff" stroke-width="1.2"/>
+            
+            <!-- Trident in Hand -->
+            <line x1="23" y1="5" x2="23" y2="27" stroke="#ffb703" stroke-width="1.6" stroke-linecap="round"/>
+            <polygon points="23,2 21,6 23,5 25,6" fill="#ffb703"/>
+            <path d="M 19,7 Q 20,11 23,12 Q 26,11 27,7" stroke="#ffb703" stroke-width="1.2" fill="none"/>
+            <polygon points="19,4 17,8 19,7 21,8" fill="#ffb703"/>
+            <polygon points="27,4 25,8 27,7 29,8" fill="#ffb703"/>
+
+            <!-- Aquaman / Poseidon Head, Golden Crown & Flowing Beard -->
+            <!-- Golden 3-Point Sea Crown -->
+            <polygon points="9,9 11,5 13,8 15,4 17,8 19,5 21,9" fill="#ffd166"/>
+            <!-- Face -->
+            <path d="M 10,10 Q 15,10 20,10 Q 19,16 15,19 Q 11,16 10,10 Z" fill="#38bdf8"/>
+            <!-- Flowing White Sea Beard -->
+            <path d="M 11,13 Q 15,22 15,24 Q 15,22 19,13 Q 15,16 11,13 Z" fill="#ffffff"/>
+            <!-- Eyes -->
+            <circle cx="13" cy="12" r="0.9" fill="#070a14"/>
+            <circle cx="17" cy="12" r="0.9" fill="#070a14"/>
+          </svg>
+          <span class="badge badge-accent">● HYCOM / ARGO 3D SLICER</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Sidebar Controls Panel with Bioluminescent Rising Jellyfish -->
+    <aside class="sidebar-panel glass-panel" id="sidebar">
+      <!-- Ambient Rising Jellyfish Background in Sidebar -->
+      <div class="sidebar-jellyfish-tank" aria-hidden="true">
+        <!-- Jellyfish 1 (Electric Cyan - Large) -->
+        <div class="rising-jellyfish jelly-1">
+          <svg viewBox="0 0 40 60" class="jelly-svg">
+            <!-- Glowing Bell Dome -->
+            <path class="jelly-bell" d="M 6,24 C 6,6 34,6 34,24 C 30,27 26,24 20,26 C 14,24 10,27 6,24 Z" fill="url(#cyanJellyGrad)" />
+            <!-- Inner Glowing Organs -->
+            <ellipse cx="20" cy="16" rx="6" ry="4" fill="#ffffff" opacity="0.6" />
+            <!-- Trailing Tentacles -->
+            <path class="jelly-tentacle tentacle-1" d="M 10,26 Q 8,38 12,50 Q 10,56 12,60" stroke="#00e5ff" stroke-width="1.2" fill="none" opacity="0.75" />
+            <path class="jelly-tentacle tentacle-2" d="M 16,26 Q 18,36 15,48 Q 17,55 16,60" stroke="#38bdf8" stroke-width="1.4" fill="none" opacity="0.85" />
+            <path class="jelly-tentacle tentacle-3" d="M 24,26 Q 22,36 25,48 Q 23,55 24,60" stroke="#38bdf8" stroke-width="1.4" fill="none" opacity="0.85" />
+            <path class="jelly-tentacle tentacle-4" d="M 30,26 Q 32,38 28,50 Q 30,56 28,60" stroke="#00e5ff" stroke-width="1.2" fill="none" opacity="0.75" />
+            <!-- Gradient Definition -->
+            <defs>
+              <radialGradient id="cyanJellyGrad" cx="50%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+                <stop offset="50%" stop-color="#00e5ff" stop-opacity="0.7" />
+                <stop offset="100%" stop-color="#0284c7" stop-opacity="0.2" />
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- Jellyfish 2 (Neon Magenta / Pink - Medium) -->
+        <div class="rising-jellyfish jelly-2">
+          <svg viewBox="0 0 34 50" class="jelly-svg">
+            <path class="jelly-bell" d="M 5,20 C 5,5 29,5 29,20 C 25,23 21,20 17,22 C 13,20 9,23 5,20 Z" fill="url(#pinkJellyGrad)" />
+            <ellipse cx="17" cy="13" rx="5" ry="3" fill="#ffffff" opacity="0.6" />
+            <path class="jelly-tentacle tentacle-1" d="M 9,22 Q 7,32 10,42 Q 8,46 10,50" stroke="#f43f5e" stroke-width="1.1" fill="none" opacity="0.8" />
+            <path class="jelly-tentacle tentacle-2" d="M 14,22 Q 16,30 13,40 Q 15,46 14,50" stroke="#fb7185" stroke-width="1.2" fill="none" opacity="0.85" />
+            <path class="jelly-tentacle tentacle-3" d="M 20,22 Q 18,30 21,40 Q 19,46 20,50" stroke="#fb7185" stroke-width="1.2" fill="none" opacity="0.85" />
+            <path class="jelly-tentacle tentacle-4" d="M 25,22 Q 27,32 24,42 Q 26,46 24,50" stroke="#f43f5e" stroke-width="1.1" fill="none" opacity="0.8" />
+            <defs>
+              <radialGradient id="pinkJellyGrad" cx="50%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+                <stop offset="50%" stop-color="#f43f5e" stop-opacity="0.75" />
+                <stop offset="100%" stop-color="#881337" stop-opacity="0.2" />
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- Jellyfish 3 (Electric Amber / Gold - Small) -->
+        <div class="rising-jellyfish jelly-3">
+          <svg viewBox="0 0 28 42" class="jelly-svg">
+            <path class="jelly-bell" d="M 4,16 C 4,4 24,4 24,16 C 21,19 18,16 14,18 C 10,16 7,19 4,16 Z" fill="url(#goldJellyGrad)" />
+            <ellipse cx="14" cy="11" rx="4" ry="2.5" fill="#ffffff" opacity="0.7" />
+            <path class="jelly-tentacle tentacle-1" d="M 8,18 Q 6,26 9,35 Q 7,39 8,42" stroke="#ffb703" stroke-width="1" fill="none" opacity="0.85" />
+            <path class="jelly-tentacle tentacle-2" d="M 14,18 Q 12,25 15,35 Q 13,39 14,42" stroke="#fbbf24" stroke-width="1.2" fill="none" opacity="0.9" />
+            <path class="jelly-tentacle tentacle-3" d="M 20,18 Q 22,26 19,35 Q 21,39 20,42" stroke="#ffb703" stroke-width="1" fill="none" opacity="0.85" />
+            <defs>
+              <radialGradient id="goldJellyGrad" cx="50%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+                <stop offset="50%" stop-color="#ffb703" stop-opacity="0.8" />
+                <stop offset="100%" stop-color="#d97706" stop-opacity="0.2" />
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- Jellyfish 4 (Violet Medusa - Fast Rising) -->
+        <div class="rising-jellyfish jelly-4">
+          <svg viewBox="0 0 24 36" class="jelly-svg">
+            <path class="jelly-bell" d="M 3,14 C 3,3 21,3 21,14 C 18,16 15,14 12,15 C 9,14 6,16 3,14 Z" fill="url(#violetJellyGrad)" />
+            <path class="jelly-tentacle tentacle-1" d="M 7,15 Q 5,22 8,30 Q 6,34 7,36" stroke="#c084fc" stroke-width="0.9" fill="none" opacity="0.8" />
+            <path class="jelly-tentacle tentacle-2" d="M 12,15 Q 14,21 11,30 Q 13,34 12,36" stroke="#e879f9" stroke-width="1.1" fill="none" opacity="0.9" />
+            <path class="jelly-tentacle tentacle-3" d="M 17,15 Q 19,22 16,30 Q 18,34 17,36" stroke="#c084fc" stroke-width="0.9" fill="none" opacity="0.8" />
+            <defs>
+              <radialGradient id="violetJellyGrad" cx="50%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+                <stop offset="50%" stop-color="#c084fc" stop-opacity="0.75" />
+                <stop offset="100%" stop-color="#7e22ce" stop-opacity="0.2" />
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- Rising Spores / Marine Snow -->
+        <div class="spore spore-1"></div>
+        <div class="spore spore-2"></div>
+        <div class="spore spore-3"></div>
+      </div>
+
+      <div class="panel-section">
+        <label class="section-label">HYDRODYNAMIC VARIABLE</label>
+        <div class="custom-select-wrapper">
+          <select id="variable-select" class="custom-select">
+            <option value="temperature" selected>Sea Water Temperature (°C)</option>
+            <option value="salinity">Sea Water Salinity (PSU)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="section-header-row">
+          <label class="section-label">DEPTH SLICE SELECTOR</label>
+          <span class="current-depth-val" id="selected-depth-chip-val">0 m (Surface)</span>
+        </div>
+        <div class="depth-chips-grid" id="depth-chips">
+          <button class="depth-chip active" data-depth="0">0 m</button>
+          <button class="depth-chip" data-depth="100">100 m</button>
+          <button class="depth-chip" data-depth="200">200 m</button>
+          <button class="depth-chip" data-depth="500">500 m</button>
+          <button class="depth-chip" data-depth="1000">1000 m</button>
+          <button class="depth-chip" data-depth="2000">2000 m</button>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="section-header-row">
+          <label class="section-label">VERTICAL EXAGGERATION</label>
+          <span class="param-value" id="exaggeration-val">15.0x</span>
+        </div>
+        <div class="slider-container">
+          <input type="range" id="exaggeration-slider" min="1" max="50" step="1" value="15" class="custom-slider" />
+          <div class="slider-ticks">
+            <span>1x</span>
+            <span>25x</span>
+            <span>50x</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <label class="section-label">LAYER OPACITY & VISUALIZATION</label>
+        <div class="toggle-row">
+          <span>Water Column Stack</span>
+          <label class="switch">
+            <input type="checkbox" id="column-mode-toggle" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span>Argo Float Markers</span>
+          <label class="switch">
+            <input type="checkbox" id="argo-toggle" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span>Coastline Vector</span>
+          <label class="switch">
+            <input type="checkbox" id="coastline-toggle" checked>
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <span>Orbit Auto-Rotation</span>
+          <label class="switch">
+            <input type="checkbox" id="rotation-toggle">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="panel-actions">
+        <button id="reset-cam-btn" class="btn btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+            <path d="M3 3v5h5"/>
+          </svg>
+          Reset Camera
+        </button>
+      </div>
+
+      <div class="guide-box">
+        <div class="guide-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          Interactions
+        </div>
+        <p>• <strong>Left Click + Drag:</strong> 3D Orbit Rotate</p>
+        <p>• <strong>Scroll Wheel:</strong> Zoom in/out</p>
+        <p>• <strong>Right Click + Drag:</strong> Pan ocean view</p>
+        <p>• <strong>Click Orange Float:</strong> CTD Profile modal</p>
+        <p>• <strong>Hover Grid:</strong> Real-time lat/lon value</p>
+      </div>
+    </aside>
+
+    <!-- Floating Scientific Colormap Bar -->
+    <div class="colorbar-panel glass-panel" id="colorbar-panel">
+      <div class="colorbar-title" id="colorbar-title">TEMP (°C)</div>
+      <div class="colorbar-wrapper">
+        <span class="colorbar-val" id="cb-max">31.5</span>
+        <div class="colorbar-gradient" id="colorbar-gradient"></div>
+        <span class="colorbar-val" id="cb-mid">16.8</span>
+        <span class="colorbar-val" id="cb-min">2.2</span>
+      </div>
+      <div class="colormap-label">Viridis</div>
+    </div>
+
+    <!-- Argo Float Profile Modal Dialog -->
+    <div class="argo-modal-backdrop hidden" id="argo-modal-backdrop">
+      <div class="argo-modal-card glass-panel" id="argo-modal-card">
+        <div class="argo-modal-header">
+          <div class="argo-modal-badge">
+            <div class="pulse-dot"></div>
+            <span id="modal-float-id">ARGO FLOAT #2902150</span>
+          </div>
+          <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+        </div>
+        <div class="argo-meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">Position</span>
+            <span class="meta-val" id="modal-float-pos">14.50°N, 67.80°E</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Current Depth</span>
+            <span class="meta-val" id="modal-float-depth">420 m</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Telemetry Status</span>
+            <span class="meta-val highlight" id="modal-float-status">Active (Cycle #42)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Platform Type</span>
+            <span class="meta-val" id="modal-float-platform">Apex CTD Profiler</span>
+          </div>
+        </div>
+        <div class="chart-container">
+          <div class="chart-header">
+            <span class="chart-title">VERTICAL CTD PROFILE (0 - 2000m)</span>
+            <div class="chart-legend">
+              <span class="legend-dot temp-dot"></span> Temperature (°C)
+              <span class="legend-dot sal-dot"></span> Salinity (PSU)
+            </div>
+          </div>
+          <canvas id="argo-chart-canvas" width="460" height="240"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Bar (Bottom) with Deep Sea Abyss Creatures (Squid, Anglerfish, Lanternfish) -->
+    <footer class="status-bar glass-panel">
+      <!-- Deep Sea Creatures Ambient Tank in Footer -->
+      <div class="footer-abyss-tank" aria-hidden="true">
+        <!-- 1. Giant Bioluminescent Squid (Darting Right Forward with Trailing Tentacles) -->
+        <div class="abyss-creature creature-squid">
+          <svg viewBox="0 0 70 20" class="abyss-svg">
+            <!-- Tentacles (Trailing on left) -->
+            <path class="squid-tentacles" d="M 22,8 Q 12,5 2,6 M 22,10 Q 10,10 0,11 M 22,12 Q 12,15 2,14" stroke="#f43f5e" stroke-width="1.2" fill="none" opacity="0.85"/>
+            <!-- 2 Long Feeding Clubs -->
+            <path class="squid-club" d="M 22,9 Q 10,7 -6,8 L -10,8" stroke="#fb7185" stroke-width="1.4" fill="none" opacity="0.9"/>
+            <!-- Squid Mantle Cone (Head on right) -->
+            <polygon points="22,6 48,6 58,10 48,14 22,14" fill="#e11d48" />
+            <!-- Fins / Wings at Cone Tip -->
+            <polygon points="46,6 58,10 52,2" fill="#be123c" />
+            <polygon points="46,14 58,10 52,18" fill="#be123c" />
+            <!-- Glowing Golden Eye -->
+            <circle cx="28" cy="10" r="2.2" fill="#facc15" />
+            <circle cx="28.5" cy="10" r="1.1" fill="#000000" />
+            <!-- Bioluminescent Light Spots -->
+            <circle cx="36" cy="8" r="0.8" fill="#38bdf8" />
+            <circle cx="42" cy="10" r="0.8" fill="#38bdf8" />
+            <circle cx="48" cy="9" r="0.8" fill="#38bdf8" />
+          </svg>
+        </div>
+
+        <!-- 2. Deep-Sea Anglerfish with Glowing Lure (Swimming Left Forward) -->
+        <div class="abyss-creature creature-anglerfish">
+          <svg viewBox="0 0 50 24" class="abyss-svg">
+            <!-- Round Bulky Body (Snout on right in SVG, flipped to left in CSS) -->
+            <path d="M 12,12 Q 18,3 34,6 Q 44,9 44,15 Q 40,21 30,22 Q 18,22 12,12 Z" fill="#1e293b" />
+            <!-- Huge Tooth-filled Mouth -->
+            <path d="M 36,12 L 44,14 L 38,18 Z" fill="#0f172a" />
+            <!-- Sharp Needle Teeth -->
+            <polygon points="38,12 39,15 40,12" fill="#ffffff" />
+            <polygon points="41,13 42,16 43,13" fill="#ffffff" />
+            <polygon points="39,18 40,15 41,18" fill="#ffffff" />
+            <!-- Illucium & Glowing Esca (Lure) -->
+            <path d="M 32,6 Q 40,-2 46,2" stroke="#38bdf8" stroke-width="1.2" fill="none"/>
+            <circle cx="46" cy="2" r="2.5" fill="#00e5ff" class="angler-lure"/>
+            <!-- Fin & Tail -->
+            <polygon points="12,12 4,6 7,12 4,18" fill="#334155" />
+            <polygon points="24,4 28,1 27,5" fill="#334155" />
+            <!-- Tiny Beady Eye -->
+            <circle cx="36" cy="9" r="1" fill="#94a3b8" />
+          </svg>
+        </div>
+
+        <!-- 3. Bioluminescent Lanternfish (Swimming Right Forward) -->
+        <div class="abyss-creature creature-lanternfish">
+          <svg viewBox="0 0 36 16" class="abyss-svg">
+            <path d="M 8,8 Q 18,2 30,7 Q 34,8 30,9 Q 18,14 8,8 Z" fill="#0f172a" stroke="#38bdf8" stroke-width="0.8"/>
+            <path d="M 8,8 L 2,3 L 4,8 L 2,13 Z" fill="#38bdf8" />
+            <!-- Big Black/Glowing Eye -->
+            <circle cx="28" cy="7" r="1.8" fill="#38bdf8" />
+            <circle cx="28.2" cy="7" r="0.9" fill="#000000" />
+            <!-- Row of Glowing Photophores (Light Organs) -->
+            <circle cx="12" cy="10" r="0.9" fill="#00e5ff" class="photophore"/>
+            <circle cx="16" cy="11" r="0.9" fill="#00e5ff" class="photophore"/>
+            <circle cx="20" cy="11" r="0.9" fill="#00e5ff" class="photophore"/>
+            <circle cx="24" cy="10" r="0.9" fill="#00e5ff" class="photophore"/>
+          </svg>
+        </div>
+
+        <!-- 4. Deep-Sea Neon Firefly Squid (Swimming Left Forward) -->
+        <div class="abyss-creature creature-firefly-squid">
+          <svg viewBox="0 0 45 16" class="abyss-svg">
+            <path d="M 14,5 Q 7,4 2,5 M 14,8 Q 6,8 0,8 M 14,11 Q 7,12 2,11" stroke="#a855f7" stroke-width="1.1" fill="none"/>
+            <polygon points="14,4 32,4 40,8 32,12 14,12" fill="#7e22ce" />
+            <polygon points="30,4 40,8 35,1" fill="#9333ea" />
+            <polygon points="30,12 40,8 35,15" fill="#9333ea" />
+            <circle cx="19" cy="8" r="1.8" fill="#c084fc" />
+            <circle cx="25" cy="6" r="0.8" fill="#00e5ff" class="photophore"/>
+            <circle cx="30" cy="8" r="0.8" fill="#00e5ff" class="photophore"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="status-item">
+        <span class="status-key">VARIABLE:</span>
+        <span class="status-val highlight" id="status-var">Temperature</span>
+      </div>
+      <div class="status-item">
+        <span class="status-key">DEPTH:</span>
+        <span class="status-val highlight" id="status-depth">0 m</span>
+      </div>
+      <div class="status-item">
+        <span class="status-key">EXAGGERATION:</span>
+        <span class="status-val" id="status-exag">15.0x</span>
+      </div>
+      <div class="status-item cursor-readout">
+        <span class="status-key">HOVER TELEMETRY:</span>
+        <span class="status-val" id="status-hover">Move mouse over ocean...</span>
+      </div>
+      <div class="status-item fps-badge">
+        <span class="status-key">FPS:</span>
+        <span class="status-val" id="status-fps">60</span>
+      </div>
+    </footer>
+
+    <!-- Main Module Script -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

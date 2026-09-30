@@ -1,0 +1,437 @@
+============================== PAGE 1 ==============================
+SMART INDIA HACKATHON 2025
+Problem Statement ID - SIH25175
+Problem Statement Title - MAITRI : An AI Assistant
+for 
+Psychological 
+& 
+Physical 
+Well-Being 
+of
+Astronauts
+Theme - Space Technology
+PS Category- Software
+Team ID -57893
+Team Name - Zillion Minds
+
+
+============================== PAGE 2 ==============================
+Sashakt
+Real-Time Monitoring: Continuous multimodal tracking of
+voice, face, and behavioral cues.
+Adaptive Conversations: Context-aware dialogue engine
+offering stress relief and motivation.
+Multimodal Fusion: Combines audio, video, and text for
+accurate emotional state recognition.
+Autonomous Operation: Fully offline system ensures reliable
+functioning without ground dependency.
+Actionable Insights: Generates daily wellness trends and
+critical incident alerts.
+Guided 
+Interventions: 
+Provides 
+relaxation 
+techniques,
+reminders, and supportive prompts.
+Human-Like Interaction: Maintains companionship role
+through short, low-cognitive-load dialogues.
+Astronaut-Centric Design: Specifically crafted for space crew’s
+mental & physical well-being.
+Lightweight Offline AI: Optimized using ONNX/TensorRT for edge
+deployment in isolated environments.
+Contextual 
+Intelligence: 
+Learns 
+from 
+prior 
+interactions 
+for
+personalized, evolving responses.
+Critical Escalation Protocols: Instantly flags emergencies with
+detailed logs to ground control.
+Emotion-Driven Interventions: Goes beyond detection to deliver
+situational, supportive actions.
+Resilient Functionality: Robust against connectivity loss, noise, and
+equipment interruptions.
+Integrated Multimodal Setup: Simultaneous analysis of speech
+tone, facial micro-expressions, and textual sentiment.
+मैत्रीी -MAITRY
+Understanding The Problem
+An AI Assistant for Psychological & Physical Well-Being of Astronauts
+Our Solution
+Our Unique Solutions
+Delayed 
+Detection: 
+Lack 
+of 
+real-time 
+monitoring 
+leads 
+to 
+late
+identification of critical health and psychological issues.
+Limited Context: Generic tools fail to capture astronaut-specific
+emotional, cognitive, and physical nuances.
+Fragmented Insights: Audio, video, and behavioral data remain
+unconnected, reducing accuracy and decision-making effectiveness.
+Ineffective 
+Support: 
+Existing 
+systems 
+lack 
+adaptive, 
+human-like
+interaction for stress relief and emotional resilience building.
+Poor 
+Autonomy: 
+Dependence 
+on 
+ground 
+communication 
+slows
+interventions in emergencies, risking mission-critical safety lapses.
+Real-time
+emotional
+mapping for
+instant crew
+wellness checks.
+Lightweight AI
+tuned for
+deep-space
+isolation
+challenges.
+Context-aware
+micro-
+interactions to
+sustain mental
+resilience.
+Seamless
+integration with
+onboard systems
+for autonomous
+support.
+USPs{
+-
+-
+-
+75% OF THE PROTOTYPE IS ALREADY COMPLETED!!!
+Scan for
+PROTOTYPE
+https://maitry-ai.vercel.app/
+Click here  for Prototye:-
+
+
+============================== PAGE 3 ==============================
+Sashakt
+Export Report
+Methodology
+Technical Approach
+Implementation Flow
+User Interface: 
+Admin Dashboard
+Tech Stack
+Multimodal Data Acquisition :Capture astronaut’s audio (tone,
+MFCC, 
+pitch), 
+video 
+(facial 
+landmarks, 
+posture 
+via
+CNN/Mediapipe), and optional physiological signals (HRV,
+sleep logs, respiration).
+Signal 
+Preprocessing 
+: 
+Apply 
+noise 
+reduction 
+(spectral
+subtraction for equipment hum), speech-to-text (ASR), and
+face 
+detection/landmark 
+tracking
+(MTCNN/Mediapipe).Synchronize 
+audio-video 
+streams 
+for
+temporal consistency.
+Feature Extraction : Audio: Mel-spectrograms, stress & prosody
+features.Video: Micro-expressions, FACS (Facial Action Coding
+System), fatigue metrics. Text: Context embeddings via
+BERT/DistilBERT for intent detection.
+Multimodal Fusion & Emotion Classification : Use Transformer-
+based 
+fusion 
+(cross-attention) 
+or 
+LSTM+CNN 
+hybrid 
+to
+integrate features. Classify into emotional states (Calm,
+Anxious, Fatigued, Stressed) with confidence calibration to
+reduce false alerts.
+Decision & Adaptive Response : Decision Layer: Normal →
+Supportive small talk, Moderate → Guided relaxation cues,
+Critical → Escalation with logs. Conversational AI (RLHF-tuned)
+adapts responses over time. Reporting & Logging: Encrypted
+local DB, daily wellness reports, secure WebSocket uplink for
+critical alerts.
+frontend
+AI Layer & Backend
+Database & Socket
+
+
+============================== PAGE 4 ==============================
+IMPACT AND BENEFITS
+Sashakt
+Potential Impact on Astronauts
+Early Stress Detection – Identifies signs of fatigue,
+anxiety, or mood shifts before they escalate.
+ Emotional Stability – Guided relaxation and micro-
+interactions sustain psychological balance.
+ Companion Role – Human-like conversations
+reduce isolation during long missions.
+ Task Readiness – Maintains focus and alertness for
+mission-critical operations.
+ Adaptive Support – Personalized responses evolve
+with each astronaut’s needs.
+Economic and Strategic Gains
+Mission Cost Savings – Prevents medical emergencies during missions, saving an
+estimated $50–100M per mission.
+Resource Optimization – Lightweight AI reduces spacecraft energy use and eases hardware
+load.
+Scalable Growth – Can expand from simple emotion detection to advanced astronaut
+healthcare.
+Global Leadership – Establishes a strong position in astronaut-focused AI innovation
+worldwide.
+Mission & Opeational Benifit
+Risk Reduction – Continuous monitoring lowers
+chances of human error in space.
+Autonomous Safety – Works offline, ensuring
+reliability during communication blackouts.
+Efficient 
+Crew 
+Management 
+– 
+Optimizes
+assignments based on wellness insights.
+Extended Mission Feasibility – Enables safe long-
+duration missions up to 18 months.
+Crisis 
+Handling 
+– 
+Escalates 
+emergencies
+instantly with detailed logs to ground control.
+35
+20
+20
+15
+10
+Reduced
+ Ground Support
+Autonomy in 
+Space
+Psychological 
+well being
+Mission 
+Safety
+Operational
+Efficiency
+Proportional impact of MAITRI
+ across key domains.
+
+
+============================== PAGE 5 ==============================
+FEASIBILITY AND VIABILITY
+Sashakt
+01
+02
+04
+05
+Analysis of the feasibility of the idea:
+Proven Research Base: Emotion recognition via audio-video validated in
+healthcare & HCI studies.
+Hardware Compatibility: Edge devices (Jetson, ARM) can run optimized AI
+models.
+Scalability: Expandable from emotion detection to advanced mental health
+support.
+Training Data Availability: Open datasets for speech, facial emotion, and
+sentiment.
+Operational Reliability: Offline system works during communication blackouts.
+Energy Efficiency: Optimized models ensure low power consumption in space
+modules.
+WHAT IFs....?
+Strategies to Overcome Challenges
+A fallback rule-
+based system
+ensures neutral,
+safe responses
+without
+escalating
+stress.
+ AI misinterprets
+emotions?
+hardware fails mid-
+mission?
+astronauts reject AI
+support?
+ extreme conditions
+distort inputs?
+prolonged use creates
+dependency?
+Redundant
+backup modules
+and lightweight
+software
+replicas
+maintain
+continuity.
+Humanized,
+companion-like
+interaction
+design
+encourages trust
+and voluntary
+usage.
+Noise reduction
+and adaptive
+models fine-
+tuned for space
+environments
+minimize
+errors.
+Built-in balance
+ensures the AI
+assists without
+replacing
+human
+decision-
+making or
+autonomy.
+Limited Onboard Computing Power
+Challenge: Heavy AI models may not run efficiently in space
+hardware.
+Strategy: Use optimized, lightweight AI models (DistilBERT,
+MobileNet, TinyML), model pruning, and quantization for offline
+deployment.
+Accuracy with Limited Data
+Challenge: Lack of large astronaut-specific datasets may reduce
+detection accuracy.
+Strategy: Apply transfer learning from large Earth-based datasets,
+simulate space conditions for synthetic data, and use incremental
+learning to adapt over time.
+ Maintaining Trust & Engagement
+Challenge: 
+Astronauts 
+may 
+find 
+responses 
+repetitive 
+or
+misclassified alerts annoying.
+Strategy: Implement multi-modal detection (voice + facial +
+physiological signals) with adaptive, personalized conversations
+and confidence scoring to minimize false alerts.
+Before MAITRY
+After MAITRY
+
+
+============================== PAGE 6 ==============================
+Sashakt
+Methodology
+Multimodal Fusion:Combines audio
+(voice tone) and visual (facial
+expressions) data for a comprehensive
+understanding.
+Single-Modality: Primarily uses voice
+command processing or text-based
+diagnostics.
+Model
+Assumptions
+Direct Correlation: Assumes that non-
+verbal cues and subtle data patterns
+are crucial for well-being monitoring.
+Explicit Intent: Assumes user intent is clearly
+expressed through voice or symptom
+reporting.
+Handling of
+Periodicity
+Proactive: Monitors for long-term
+trends and periodic changes in an
+astronaut's emotional state.
+Reactive: Only responds to explicit
+commands or reported issues, with no long-
+term analysis.
+Adaptability
+High Adaptability: Tailors its
+conversational style and interventions
+to the individual astronaut's personality
+and mood.
+Limited Adaptability: Follows pre-
+programmed scripts or rigid conversational
+flows.
+Computational
+Cost
+Higher: Requires more processing
+power for real-time multimodal data
+fusion. Optimized for on-device
+operation to mitigate this.
+Lower: Designed for simpler tasks or relies on
+vast cloud-based computational resources.
+Performance
+(Metrics)
+Subjective: Evaluated on the accuracy of
+emotion detection and the effectiveness of
+interventions, 
+measured 
+through 
+user
+satisfaction and well-being metrics.
+Objective: Measured by task success rate
+(e.g., retrieving a document) or diagnostic
+accuracy.
+Data Requirements
+Extensive Multimodal Data: Needs large,
+diverse datasets of audio and video with
+corresponding emotional labels.
+Task-Specific Data: Requires datasets of
+medical 
+knowledge 
+or 
+operational
+procedures.
+Feature
+Our Proposed Solution
+Existing Conventional Solutions
+RESEARCH & REFERENCES
+Research and Datasets references
+IEMOCAP — multimodal dataset (speech + text + video)
+widely used for training MER models.
+ https://sail.usc.edu/iemocap/
+WESAD — dataset for wearable stress and affect detection
+using physiological signals (HRV, respiration).
+ https://archive.ics.uci.edu/ml/datasets/WESAD+ (    
+Wearable+Stress+and+Affect+Detection)
+Synthetic Astronaut Training Data — NASA/ESA initiatives
+on simulating astronaut stress & fatigue signals
+https://www.esa.int/Science_Exploration/Human_and_Robotic_Explo
+ration/Astronauts/Space_psychology
+RAVDESS — audio-visual emotion dataset including speech
+and facial expression recordings.
+https://zenodo.org/record/1188976
+Model 
+training 
+things:Transformer-Based 
+Fusion 
+for
+Multimodal Signals
+ https://arxiv.org/abs/2012.11871
+ONNX & TensorRT Optimizations for Edge AI
+https://docs.nvidia.com/deeplearning/tensorrt/developer-
+guide/index.html
+TinyML for Space Applications
+ https://www.nature.com/articles/s42256-021-00399-7 
+
+

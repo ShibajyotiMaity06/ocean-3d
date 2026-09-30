@@ -1,0 +1,1334 @@
+[
+  {
+    "id": "2902150",
+    "name": "INCOIS Argo #2902150",
+    "wmo": "2902150",
+    "lat": 14.5,
+    "lon": 67.8,
+    "currentDepth": 420,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 42,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 27.18,
+        "salinity": 36.19
+      },
+      {
+        "depth": 20,
+        "temp": 25.83,
+        "salinity": 36.16
+      },
+      {
+        "depth": 50,
+        "temp": 24.03,
+        "salinity": 36.12
+      },
+      {
+        "depth": 100,
+        "temp": 21.48,
+        "salinity": 35.98
+      },
+      {
+        "depth": 150,
+        "temp": 18.98,
+        "salinity": 35.91
+      },
+      {
+        "depth": 200,
+        "temp": 16.96,
+        "salinity": 35.79
+      },
+      {
+        "depth": 300,
+        "temp": 13.55,
+        "salinity": 35.64
+      },
+      {
+        "depth": 500,
+        "temp": 9.07,
+        "salinity": 35.39
+      },
+      {
+        "depth": 750,
+        "temp": 5.93,
+        "salinity": 35.1
+      },
+      {
+        "depth": 1000,
+        "temp": 4.15,
+        "salinity": 34.96
+      },
+      {
+        "depth": 1500,
+        "temp": 2.78,
+        "salinity": 34.85
+      },
+      {
+        "depth": 2000,
+        "temp": 2.47,
+        "salinity": 34.79
+      }
+    ]
+  },
+  {
+    "id": "2902151",
+    "name": "INCOIS Argo #2902151",
+    "wmo": "2902151",
+    "lat": 18.2,
+    "lon": 70.1,
+    "currentDepth": 850,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 49,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 27.48,
+        "salinity": 36.16
+      },
+      {
+        "depth": 20,
+        "temp": 26.19,
+        "salinity": 36.17
+      },
+      {
+        "depth": 50,
+        "temp": 24.38,
+        "salinity": 36.11
+      },
+      {
+        "depth": 100,
+        "temp": 21.62,
+        "salinity": 36
+      },
+      {
+        "depth": 150,
+        "temp": 19.2,
+        "salinity": 35.92
+      },
+      {
+        "depth": 200,
+        "temp": 17.21,
+        "salinity": 35.73
+      },
+      {
+        "depth": 300,
+        "temp": 13.69,
+        "salinity": 35.64
+      },
+      {
+        "depth": 500,
+        "temp": 9.14,
+        "salinity": 35.4
+      },
+      {
+        "depth": 750,
+        "temp": 5.88,
+        "salinity": 35.13
+      },
+      {
+        "depth": 1000,
+        "temp": 4.12,
+        "salinity": 34.98
+      },
+      {
+        "depth": 1500,
+        "temp": 2.92,
+        "salinity": 34.82
+      },
+      {
+        "depth": 2000,
+        "temp": 2.56,
+        "salinity": 34.76
+      }
+    ]
+  },
+  {
+    "id": "2902152",
+    "name": "INCOIS Argo #2902152",
+    "wmo": "2902152",
+    "lat": 11,
+    "lon": 65.5,
+    "currentDepth": 150,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 56,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 28.24,
+        "salinity": 36.15
+      },
+      {
+        "depth": 20,
+        "temp": 26.98,
+        "salinity": 36.11
+      },
+      {
+        "depth": 50,
+        "temp": 25.03,
+        "salinity": 36.13
+      },
+      {
+        "depth": 100,
+        "temp": 22.35,
+        "salinity": 35.95
+      },
+      {
+        "depth": 150,
+        "temp": 19.88,
+        "salinity": 35.91
+      },
+      {
+        "depth": 200,
+        "temp": 17.72,
+        "salinity": 35.77
+      },
+      {
+        "depth": 300,
+        "temp": 14.21,
+        "salinity": 35.61
+      },
+      {
+        "depth": 500,
+        "temp": 9.28,
+        "salinity": 35.35
+      },
+      {
+        "depth": 750,
+        "temp": 6,
+        "salinity": 35.16
+      },
+      {
+        "depth": 1000,
+        "temp": 4.22,
+        "salinity": 35.03
+      },
+      {
+        "depth": 1500,
+        "temp": 2.9,
+        "salinity": 34.8
+      },
+      {
+        "depth": 2000,
+        "temp": 2.56,
+        "salinity": 34.76
+      }
+    ]
+  },
+  {
+    "id": "2902153",
+    "name": "INCOIS Argo #2902153",
+    "wmo": "2902153",
+    "lat": 7.5,
+    "lon": 72.3,
+    "currentDepth": 1200,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 63,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 29.69,
+        "salinity": 36.2
+      },
+      {
+        "depth": 20,
+        "temp": 28.2,
+        "salinity": 36.2
+      },
+      {
+        "depth": 50,
+        "temp": 26.21,
+        "salinity": 36.11
+      },
+      {
+        "depth": 100,
+        "temp": 23.31,
+        "salinity": 35.94
+      },
+      {
+        "depth": 150,
+        "temp": 20.78,
+        "salinity": 35.89
+      },
+      {
+        "depth": 200,
+        "temp": 18.57,
+        "salinity": 35.78
+      },
+      {
+        "depth": 300,
+        "temp": 14.71,
+        "salinity": 35.58
+      },
+      {
+        "depth": 500,
+        "temp": 9.69,
+        "salinity": 35.38
+      },
+      {
+        "depth": 750,
+        "temp": 6.24,
+        "salinity": 35.16
+      },
+      {
+        "depth": 1000,
+        "temp": 4.41,
+        "salinity": 34.95
+      },
+      {
+        "depth": 1500,
+        "temp": 2.91,
+        "salinity": 34.87
+      },
+      {
+        "depth": 2000,
+        "temp": 2.54,
+        "salinity": 34.79
+      }
+    ]
+  },
+  {
+    "id": "2902154",
+    "name": "INCOIS Argo #2902154",
+    "wmo": "2902154",
+    "lat": 16.8,
+    "lon": 86.4,
+    "currentDepth": 310,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 70,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 27.15,
+        "salinity": 33.64
+      },
+      {
+        "depth": 20,
+        "temp": 25.73,
+        "salinity": 33.65
+      },
+      {
+        "depth": 50,
+        "temp": 24,
+        "salinity": 33.71
+      },
+      {
+        "depth": 100,
+        "temp": 21.28,
+        "salinity": 33.8
+      },
+      {
+        "depth": 150,
+        "temp": 18.96,
+        "salinity": 33.8
+      },
+      {
+        "depth": 200,
+        "temp": 16.97,
+        "salinity": 33.95
+      },
+      {
+        "depth": 300,
+        "temp": 13.53,
+        "salinity": 34.08
+      },
+      {
+        "depth": 500,
+        "temp": 8.95,
+        "salinity": 34.18
+      },
+      {
+        "depth": 750,
+        "temp": 5.75,
+        "salinity": 34.34
+      },
+      {
+        "depth": 1000,
+        "temp": 4.27,
+        "salinity": 34.45
+      },
+      {
+        "depth": 1500,
+        "temp": 2.88,
+        "salinity": 34.58
+      },
+      {
+        "depth": 2000,
+        "temp": 2.53,
+        "salinity": 34.68
+      }
+    ]
+  },
+  {
+    "id": "2902155",
+    "name": "INCOIS Argo #2902155",
+    "wmo": "2902155",
+    "lat": 13.2,
+    "lon": 83.9,
+    "currentDepth": 680,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 77,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 27.43,
+        "salinity": 33.62
+      },
+      {
+        "depth": 20,
+        "temp": 26.13,
+        "salinity": 33.66
+      },
+      {
+        "depth": 50,
+        "temp": 24.41,
+        "salinity": 33.69
+      },
+      {
+        "depth": 100,
+        "temp": 21.65,
+        "salinity": 33.72
+      },
+      {
+        "depth": 150,
+        "temp": 19.2,
+        "salinity": 33.83
+      },
+      {
+        "depth": 200,
+        "temp": 17.13,
+        "salinity": 33.87
+      },
+      {
+        "depth": 300,
+        "temp": 13.69,
+        "salinity": 33.98
+      },
+      {
+        "depth": 500,
+        "temp": 9.19,
+        "salinity": 34.23
+      },
+      {
+        "depth": 750,
+        "temp": 5.97,
+        "salinity": 34.4
+      },
+      {
+        "depth": 1000,
+        "temp": 4.27,
+        "salinity": 34.45
+      },
+      {
+        "depth": 1500,
+        "temp": 2.83,
+        "salinity": 34.57
+      },
+      {
+        "depth": 2000,
+        "temp": 2.59,
+        "salinity": 34.62
+      }
+    ]
+  },
+  {
+    "id": "2902156",
+    "name": "INCOIS Argo #2902156",
+    "wmo": "2902156",
+    "lat": 9.4,
+    "lon": 88.2,
+    "currentDepth": 1450,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 84,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 28.94,
+        "salinity": 33.64
+      },
+      {
+        "depth": 20,
+        "temp": 27.59,
+        "salinity": 33.61
+      },
+      {
+        "depth": 50,
+        "temp": 25.61,
+        "salinity": 33.66
+      },
+      {
+        "depth": 100,
+        "temp": 22.79,
+        "salinity": 33.82
+      },
+      {
+        "depth": 150,
+        "temp": 20.36,
+        "salinity": 33.81
+      },
+      {
+        "depth": 200,
+        "temp": 18.06,
+        "salinity": 33.88
+      },
+      {
+        "depth": 300,
+        "temp": 14.48,
+        "salinity": 33.99
+      },
+      {
+        "depth": 500,
+        "temp": 9.5,
+        "salinity": 34.26
+      },
+      {
+        "depth": 750,
+        "temp": 6.1,
+        "salinity": 34.42
+      },
+      {
+        "depth": 1000,
+        "temp": 4.39,
+        "salinity": 34.5
+      },
+      {
+        "depth": 1500,
+        "temp": 3,
+        "salinity": 34.6
+      },
+      {
+        "depth": 2000,
+        "temp": 2.48,
+        "salinity": 34.65
+      }
+    ]
+  },
+  {
+    "id": "2902157",
+    "name": "INCOIS Argo #2902157",
+    "wmo": "2902157",
+    "lat": 5.1,
+    "lon": 80.5,
+    "currentDepth": 950,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 91,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 29.93,
+        "salinity": 33.6
+      },
+      {
+        "depth": 20,
+        "temp": 28.51,
+        "salinity": 33.62
+      },
+      {
+        "depth": 50,
+        "temp": 26.57,
+        "salinity": 33.7
+      },
+      {
+        "depth": 100,
+        "temp": 23.64,
+        "salinity": 33.8
+      },
+      {
+        "depth": 150,
+        "temp": 21.03,
+        "salinity": 33.84
+      },
+      {
+        "depth": 200,
+        "temp": 18.72,
+        "salinity": 33.88
+      },
+      {
+        "depth": 300,
+        "temp": 14.97,
+        "salinity": 34.01
+      },
+      {
+        "depth": 500,
+        "temp": 9.73,
+        "salinity": 34.19
+      },
+      {
+        "depth": 750,
+        "temp": 6.23,
+        "salinity": 34.39
+      },
+      {
+        "depth": 1000,
+        "temp": 4.45,
+        "salinity": 34.52
+      },
+      {
+        "depth": 1500,
+        "temp": 2.93,
+        "salinity": 34.63
+      },
+      {
+        "depth": 2000,
+        "temp": 2.54,
+        "salinity": 34.71
+      }
+    ]
+  },
+  {
+    "id": "2902158",
+    "name": "INCOIS Argo #2902158",
+    "wmo": "2902158",
+    "lat": 21,
+    "lon": 66.8,
+    "currentDepth": 180,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 98,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 28.58,
+        "salinity": 36.21
+      },
+      {
+        "depth": 20,
+        "temp": 27.13,
+        "salinity": 36.2
+      },
+      {
+        "depth": 50,
+        "temp": 25.22,
+        "salinity": 36.03
+      },
+      {
+        "depth": 100,
+        "temp": 22.5,
+        "salinity": 35.99
+      },
+      {
+        "depth": 150,
+        "temp": 19.91,
+        "salinity": 35.86
+      },
+      {
+        "depth": 200,
+        "temp": 17.88,
+        "salinity": 35.76
+      },
+      {
+        "depth": 300,
+        "temp": 14.19,
+        "salinity": 35.64
+      },
+      {
+        "depth": 500,
+        "temp": 9.4,
+        "salinity": 35.32
+      },
+      {
+        "depth": 750,
+        "temp": 6.01,
+        "salinity": 35.12
+      },
+      {
+        "depth": 1000,
+        "temp": 4.34,
+        "salinity": 34.97
+      },
+      {
+        "depth": 1500,
+        "temp": 2.99,
+        "salinity": 34.86
+      },
+      {
+        "depth": 2000,
+        "temp": 2.58,
+        "salinity": 34.74
+      }
+    ]
+  },
+  {
+    "id": "2902159",
+    "name": "INCOIS Argo #2902159",
+    "wmo": "2902159",
+    "lat": 19.5,
+    "lon": 87.5,
+    "currentDepth": 520,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 105,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 27.87,
+        "salinity": 33.61
+      },
+      {
+        "depth": 20,
+        "temp": 26.59,
+        "salinity": 33.68
+      },
+      {
+        "depth": 50,
+        "temp": 24.72,
+        "salinity": 33.72
+      },
+      {
+        "depth": 100,
+        "temp": 21.91,
+        "salinity": 33.76
+      },
+      {
+        "depth": 150,
+        "temp": 19.59,
+        "salinity": 33.81
+      },
+      {
+        "depth": 200,
+        "temp": 17.5,
+        "salinity": 33.88
+      },
+      {
+        "depth": 300,
+        "temp": 14.05,
+        "salinity": 33.99
+      },
+      {
+        "depth": 500,
+        "temp": 9.14,
+        "salinity": 34.2
+      },
+      {
+        "depth": 750,
+        "temp": 5.9,
+        "salinity": 34.42
+      },
+      {
+        "depth": 1000,
+        "temp": 4.33,
+        "salinity": 34.46
+      },
+      {
+        "depth": 1500,
+        "temp": 2.97,
+        "salinity": 34.65
+      },
+      {
+        "depth": 2000,
+        "temp": 2.47,
+        "salinity": 34.67
+      }
+    ]
+  },
+  {
+    "id": "2902160",
+    "name": "INCOIS Argo #2902160",
+    "wmo": "2902160",
+    "lat": 8.8,
+    "lon": 76.2,
+    "currentDepth": 75,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 112,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 29.29,
+        "salinity": 33.57
+      },
+      {
+        "depth": 20,
+        "temp": 27.75,
+        "salinity": 33.68
+      },
+      {
+        "depth": 50,
+        "temp": 25.98,
+        "salinity": 33.73
+      },
+      {
+        "depth": 100,
+        "temp": 22.94,
+        "salinity": 33.77
+      },
+      {
+        "depth": 150,
+        "temp": 20.52,
+        "salinity": 33.88
+      },
+      {
+        "depth": 200,
+        "temp": 18.23,
+        "salinity": 33.89
+      },
+      {
+        "depth": 300,
+        "temp": 14.65,
+        "salinity": 34.07
+      },
+      {
+        "depth": 500,
+        "temp": 9.6,
+        "salinity": 34.23
+      },
+      {
+        "depth": 750,
+        "temp": 6.1,
+        "salinity": 34.37
+      },
+      {
+        "depth": 1000,
+        "temp": 4.42,
+        "salinity": 34.45
+      },
+      {
+        "depth": 1500,
+        "temp": 2.87,
+        "salinity": 34.59
+      },
+      {
+        "depth": 2000,
+        "temp": 2.58,
+        "salinity": 34.66
+      }
+    ]
+  },
+  {
+    "id": "2902161",
+    "name": "INCOIS Argo #2902161",
+    "wmo": "2902161",
+    "lat": 12,
+    "lon": 74,
+    "currentDepth": 290,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 119,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 27.75,
+        "salinity": 36.16
+      },
+      {
+        "depth": 20,
+        "temp": 26.54,
+        "salinity": 36.11
+      },
+      {
+        "depth": 50,
+        "temp": 24.61,
+        "salinity": 36.09
+      },
+      {
+        "depth": 100,
+        "temp": 21.95,
+        "salinity": 35.99
+      },
+      {
+        "depth": 150,
+        "temp": 19.48,
+        "salinity": 35.9
+      },
+      {
+        "depth": 200,
+        "temp": 17.41,
+        "salinity": 35.78
+      },
+      {
+        "depth": 300,
+        "temp": 13.9,
+        "salinity": 35.62
+      },
+      {
+        "depth": 500,
+        "temp": 9.3,
+        "salinity": 35.37
+      },
+      {
+        "depth": 750,
+        "temp": 5.95,
+        "salinity": 35.15
+      },
+      {
+        "depth": 1000,
+        "temp": 4.25,
+        "salinity": 34.93
+      },
+      {
+        "depth": 1500,
+        "temp": 2.91,
+        "salinity": 34.77
+      },
+      {
+        "depth": 2000,
+        "temp": 2.52,
+        "salinity": 34.77
+      }
+    ]
+  },
+  {
+    "id": "2902162",
+    "name": "INCOIS Argo #2902162",
+    "wmo": "2902162",
+    "lat": 15,
+    "lon": 89.5,
+    "currentDepth": 1100,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 126,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 26.98,
+        "salinity": 33.61
+      },
+      {
+        "depth": 20,
+        "temp": 25.82,
+        "salinity": 33.62
+      },
+      {
+        "depth": 50,
+        "temp": 23.98,
+        "salinity": 33.73
+      },
+      {
+        "depth": 100,
+        "temp": 21.41,
+        "salinity": 33.74
+      },
+      {
+        "depth": 150,
+        "temp": 19.03,
+        "salinity": 33.85
+      },
+      {
+        "depth": 200,
+        "temp": 16.94,
+        "salinity": 33.89
+      },
+      {
+        "depth": 300,
+        "temp": 13.53,
+        "salinity": 34.07
+      },
+      {
+        "depth": 500,
+        "temp": 9.04,
+        "salinity": 34.19
+      },
+      {
+        "depth": 750,
+        "temp": 5.88,
+        "salinity": 34.38
+      },
+      {
+        "depth": 1000,
+        "temp": 4.12,
+        "salinity": 34.52
+      },
+      {
+        "depth": 1500,
+        "temp": 2.82,
+        "salinity": 34.6
+      },
+      {
+        "depth": 2000,
+        "temp": 2.51,
+        "salinity": 34.64
+      }
+    ]
+  },
+  {
+    "id": "2902163",
+    "name": "INCOIS Argo #2902163",
+    "wmo": "2902163",
+    "lat": 4.2,
+    "lon": 63.5,
+    "currentDepth": 1380,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 133,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 29.99,
+        "salinity": 36.18
+      },
+      {
+        "depth": 20,
+        "temp": 28.53,
+        "salinity": 36.16
+      },
+      {
+        "depth": 50,
+        "temp": 26.44,
+        "salinity": 36.07
+      },
+      {
+        "depth": 100,
+        "temp": 23.65,
+        "salinity": 36.01
+      },
+      {
+        "depth": 150,
+        "temp": 21.01,
+        "salinity": 35.86
+      },
+      {
+        "depth": 200,
+        "temp": 18.61,
+        "salinity": 35.82
+      },
+      {
+        "depth": 300,
+        "temp": 14.91,
+        "salinity": 35.58
+      },
+      {
+        "depth": 500,
+        "temp": 9.83,
+        "salinity": 35.33
+      },
+      {
+        "depth": 750,
+        "temp": 6.13,
+        "salinity": 35.16
+      },
+      {
+        "depth": 1000,
+        "temp": 4.4,
+        "salinity": 34.98
+      },
+      {
+        "depth": 1500,
+        "temp": 2.86,
+        "salinity": 34.8
+      },
+      {
+        "depth": 2000,
+        "temp": 2.59,
+        "salinity": 34.76
+      }
+    ]
+  },
+  {
+    "id": "2902164",
+    "name": "INCOIS Argo #2902164",
+    "wmo": "2902164",
+    "lat": 17.5,
+    "lon": 72.8,
+    "currentDepth": 480,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 140,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 27.16,
+        "salinity": 36.21
+      },
+      {
+        "depth": 20,
+        "temp": 26.02,
+        "salinity": 36.16
+      },
+      {
+        "depth": 50,
+        "temp": 24.16,
+        "salinity": 36.12
+      },
+      {
+        "depth": 100,
+        "temp": 21.45,
+        "salinity": 35.92
+      },
+      {
+        "depth": 150,
+        "temp": 19.1,
+        "salinity": 35.84
+      },
+      {
+        "depth": 200,
+        "temp": 17.1,
+        "salinity": 35.77
+      },
+      {
+        "depth": 300,
+        "temp": 13.66,
+        "salinity": 35.59
+      },
+      {
+        "depth": 500,
+        "temp": 8.96,
+        "salinity": 35.35
+      },
+      {
+        "depth": 750,
+        "temp": 5.87,
+        "salinity": 35.12
+      },
+      {
+        "depth": 1000,
+        "temp": 4.19,
+        "salinity": 35.03
+      },
+      {
+        "depth": 1500,
+        "temp": 2.9,
+        "salinity": 34.78
+      },
+      {
+        "depth": 2000,
+        "temp": 2.54,
+        "salinity": 34.79
+      }
+    ]
+  },
+  {
+    "id": "2902165",
+    "name": "INCOIS Argo #2902165",
+    "wmo": "2902165",
+    "lat": 6.8,
+    "lon": 85,
+    "currentDepth": 820,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 147,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 29.84,
+        "salinity": 33.61
+      },
+      {
+        "depth": 20,
+        "temp": 28.38,
+        "salinity": 33.68
+      },
+      {
+        "depth": 50,
+        "temp": 26.54,
+        "salinity": 33.7
+      },
+      {
+        "depth": 100,
+        "temp": 23.47,
+        "salinity": 33.77
+      },
+      {
+        "depth": 150,
+        "temp": 20.9,
+        "salinity": 33.87
+      },
+      {
+        "depth": 200,
+        "temp": 18.56,
+        "salinity": 33.88
+      },
+      {
+        "depth": 300,
+        "temp": 14.83,
+        "salinity": 34.04
+      },
+      {
+        "depth": 500,
+        "temp": 9.7,
+        "salinity": 34.19
+      },
+      {
+        "depth": 750,
+        "temp": 6.11,
+        "salinity": 34.38
+      },
+      {
+        "depth": 1000,
+        "temp": 4.36,
+        "salinity": 34.51
+      },
+      {
+        "depth": 1500,
+        "temp": 2.91,
+        "salinity": 34.64
+      },
+      {
+        "depth": 2000,
+        "temp": 2.61,
+        "salinity": 34.68
+      }
+    ]
+  },
+  {
+    "id": "2902166",
+    "name": "INCOIS Argo #2902166",
+    "wmo": "2902166",
+    "lat": 10.5,
+    "lon": 92,
+    "currentDepth": 610,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 154,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 28.56,
+        "salinity": 33.61
+      },
+      {
+        "depth": 20,
+        "temp": 27.22,
+        "salinity": 33.61
+      },
+      {
+        "depth": 50,
+        "temp": 25.32,
+        "salinity": 33.71
+      },
+      {
+        "depth": 100,
+        "temp": 22.37,
+        "salinity": 33.81
+      },
+      {
+        "depth": 150,
+        "temp": 20,
+        "salinity": 33.86
+      },
+      {
+        "depth": 200,
+        "temp": 17.73,
+        "salinity": 33.91
+      },
+      {
+        "depth": 300,
+        "temp": 14.22,
+        "salinity": 34.04
+      },
+      {
+        "depth": 500,
+        "temp": 9.41,
+        "salinity": 34.19
+      },
+      {
+        "depth": 750,
+        "temp": 6,
+        "salinity": 34.34
+      },
+      {
+        "depth": 1000,
+        "temp": 4.31,
+        "salinity": 34.49
+      },
+      {
+        "depth": 1500,
+        "temp": 2.92,
+        "salinity": 34.56
+      },
+      {
+        "depth": 2000,
+        "temp": 2.5,
+        "salinity": 34.7
+      }
+    ]
+  },
+  {
+    "id": "2902167",
+    "name": "INCOIS Argo #2902167",
+    "wmo": "2902167",
+    "lat": 22.8,
+    "lon": 68.2,
+    "currentDepth": 110,
+    "date": "2023-03-21",
+    "platform": "Apex Profiling Float",
+    "status": "Active Telemetry",
+    "cycleNumber": 161,
+    "profile": [
+      {
+        "depth": 0,
+        "temp": 29.29,
+        "salinity": 36.2
+      },
+      {
+        "depth": 20,
+        "temp": 27.86,
+        "salinity": 36.13
+      },
+      {
+        "depth": 50,
+        "temp": 26.06,
+        "salinity": 36.04
+      },
+      {
+        "depth": 100,
+        "temp": 23.02,
+        "salinity": 36
+      },
+      {
+        "depth": 150,
+        "temp": 20.44,
+        "salinity": 35.87
+      },
+      {
+        "depth": 200,
+        "temp": 18.24,
+        "salinity": 35.82
+      },
+      {
+        "depth": 300,
+        "temp": 14.57,
+        "salinity": 35.63
+      },
+      {
+        "depth": 500,
+        "temp": 9.56,
+        "salinity": 35.31
+      },
+      {
+        "depth": 750,
+        "temp": 6.13,
+        "salinity": 35.11
+      },
+      {
+        "depth": 1000,
+        "temp": 4.35,
+        "salinity": 34.96
+      },
+      {
+        "depth": 1500,
+        "temp": 2.94,
+        "salinity": 34.86
+      },
+      {
+        "depth": 2000,
+        "temp": 2.6,
+        "salinity": 34.74
+      }
+    ]
+  }
+]

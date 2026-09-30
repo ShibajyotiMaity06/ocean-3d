@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Road to SDE — 2027</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+  --bg: #090a0c;
+  --surface: #101216;
+  --surface-2: #15171c;
+  --surface-3: #1b1e24;
+  --border: #252932;
+
+  --text: #f1f3f5;
+  --muted: #8b919c;
+  --muted-2: #626873;
+
+  --accent: #7c5cff;
+  --accent-2: #9a82ff;
+  --accent-soft: rgba(124,92,255,.12);
+
+  --green: #45d483;
+  --green-soft: rgba(69,212,131,.12);
+
+  --red: #ff6464;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at 80% 0%,
+      rgba(124,92,255,.10),
+      transparent 30%
+    ),
+    var(--bg);
+
+  color: var(--text);
+  font-family: "DM Sans", sans-serif;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  width: min(1100px, calc(100% - 28px));
+  margin: auto;
+  padding: 30px 0 60px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 25px;
+}
+
+.eyebrow {
+  color: var(--accent-2);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(30px, 5vw, 44px);
+  letter-spacing: -.045em;
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.today {
+  color: var(--muted);
+  font-size: 13px;
+  text-align: right;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  padding: 32px;
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(124,92,255,.15),
+      transparent 55%
+    ),
+    var(--surface);
+
+  border: 1px solid var(--border);
+
+  margin-bottom: 18px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.3fr .7fr;
+  gap: 35px;
+  align-items: center;
+}
+
+.hero-label {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.countdown {
+  font-family: "Space Grotesk";
+  font-size: clamp(52px, 8vw, 82px);
+  font-weight: 700;
+  line-height: .9;
+  letter-spacing: -.06em;
+}
+
+.countdown span {
+  color: var(--accent-2);
+}
+
+.deadline {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.hero-message {
+  margin-top: 22px;
+  padding: 12px 14px;
+
+  background: rgba(255,255,255,.035);
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  color: #c9cdd5;
+  font-size: 13px;
+}
+
+.progress-title {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 10px;
+}
+
+.progress-value {
+  font-family: "Space Grotesk";
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.progress-bar {
+  height: 9px;
+  background: var(--surface-3);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--accent),
+      var(--accent-2)
+    );
+
+  transition: width .5s ease;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 17px;
+}
+
+.card-title {
+  font-family: "Space Grotesk";
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card-meta {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+
+/* =========================
+   TOMORROW
+========================= */
+
+.tomorrow {
+  border-color: rgba(124,92,255,.30);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(124,92,255,.08),
+      transparent 70%
+    ),
+    var(--surface);
+}
+
+.tomorrow-badge {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 4px 8px;
+
+  border-radius: 6px;
+
+  background: var(--accent-soft);
+  color: var(--accent-2);
+
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.tomorrow-date {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.next-input {
+  width: 100%;
+  min-height: 105px;
+
+  resize: vertical;
+
+  background: var(--surface-2);
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  color: var(--text);
+
+  padding: 13px;
+
+  outline: none;
+
+  line-height: 1.5;
+}
+
+.next-input:focus {
+  border-color: var(--accent);
+}
+
+.next-input::placeholder {
+  color: var(--muted-2);
+}
+
+.saved-text {
+  margin-top: 8px;
+  color: var(--green);
+  font-size: 11px;
+}
+
+
+/* =========================
+   TODAY TASKS
+========================= */
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  padding: 14px;
+
+  border-radius: 11px;
+
+  background: var(--surface-2);
+
+  border: 1px solid transparent;
+
+  transition: .2s;
+}
+
+.task:hover {
+  border-color: var(--border);
+}
+
+.task.done {
+  background: var(--green-soft);
+  border-color: rgba(69,212,131,.18);
+}
+
+.checkbox {
+  width: 22px;
+  height: 22px;
+
+  flex-shrink: 0;
+
+  border: 1px solid #414651;
+  border-radius: 6px;
+
+  display: grid;
+  place-items: center;
+}
+
+.checkbox::after {
+  content: "✓";
+
+  color: #07140c;
+  font-size: 13px;
+  font-weight: 900;
+
+  opacity: 0;
+}
+
+.task.done .checkbox {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.task.done .checkbox::after {
+  opacity: 1;
+}
+
+.task-info {
+  flex: 1;
+}
+
+.task-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.task-sub {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.task-time {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.today-progress {
+  margin-top: 18px;
+}
+
+.small-progress {
+  height: 6px;
+  background: var(--surface-3);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.small-fill {
+  height: 100%;
+  width: 0;
+  background: var(--green);
+  transition: width .4s ease;
+}
+
+.progress-text {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+
+/* =========================
+   WEEK
+========================= */
+
+.week-list {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.week-row {
+  display: grid;
+  grid-template-columns: 115px 1fr 45px;
+  gap: 12px;
+  align-items: center;
+}
+
+.week-name {
+  font-size: 13px;
+}
+
+.week-bar {
+  height: 7px;
+  background: var(--surface-3);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.week-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: inherit;
+}
+
+.week-number {
+  text-align: right;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+
+/* =========================
+   ROADMAP
+========================= */
+
+.roadmap {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  position: relative;
+
+  padding: 15px 0 5px;
+}
+
+.roadmap::before {
+  content: "";
+
+  position: absolute;
+
+  top: 28px;
+  left: 20px;
+  right: 20px;
+
+  height: 2px;
+
+  background: var(--border);
+}
+
+.milestone {
+  width: 115px;
+
+  text-align: center;
+
+  position: relative;
+  z-index: 1;
+}
+
+.milestone-dot {
+  width: 27px;
+  height: 27px;
+
+  margin: auto auto 10px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: var(--surface-3);
+
+  border: 2px solid #363a43;
+
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+.milestone.done .milestone-dot {
+  background: var(--green);
+  border-color: var(--green);
+  color: #07140c;
+}
+
+.milestone.current .milestone-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+
+  box-shadow:
+    0 0 0 7px var(--accent-soft);
+}
+
+.milestone-name {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.milestone.done .milestone-name,
+.milestone.current .milestone-name {
+  color: var(--text);
+}
+
+
+/* =========================
+   HEATMAP
+========================= */
+
+.heatmap {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  gap: 5px;
+}
+
+.heat {
+  aspect-ratio: 1;
+  border-radius: 4px;
+
+  background: var(--surface-3);
+}
+
+.heat.partial {
+  background: #463c70;
+}
+
+.heat.full {
+  background: var(--green);
+}
+
+.heat.today {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.legend {
+  display: flex;
+  gap: 15px;
+
+  margin-top: 13px;
+
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-box {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 3px;
+
+  background: var(--surface-3);
+}
+
+.legend-box.partial {
+  background: #463c70;
+}
+
+.legend-box.full {
+  background: var(--green);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  text-align: center;
+
+  margin-top: 28px;
+
+  color: var(--muted-2);
+
+  font-size: 12px;
+}
+
+.reset {
+  border: 0;
+  background: transparent;
+
+  color: var(--muted-2);
+
+  text-decoration: underline;
+
+  font-size: 11px;
+
+  margin-top: 8px;
+}
+
+.reset:hover {
+  color: var(--red);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 760px) {
+
+  .app {
+    width: min(100% - 18px, 600px);
+    padding-top: 20px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .today {
+    text-align: left;
+  }
+
+  .hero {
+    padding: 23px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full {
+    grid-column: auto;
+  }
+
+  .roadmap {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 15px;
+  }
+
+  .roadmap::before {
+    width: 850px;
+    right: auto;
+  }
+
+  .milestone {
+    min-width: 95px;
+  }
+
+  .heatmap {
+    grid-template-columns: repeat(10, 1fr);
+  }
+
+  .week-row {
+    grid-template-columns: 90px 1fr 40px;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+  <div>
+
+    <div class="eyebrow">
+      Personal Command Center
+    </div>
+
+    <h1>
+      Road to SDE
+    </h1>
+
+    <div class="subtitle">
+      Two things every day. Keep moving.
+    </div>
+
+  </div>
+
+  <div
+    class="today"
+    id="todayDate"
+  ></div>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div class="hero-grid">
+
+    <div>
+
+      <div class="hero-label">
+        TIME UNTIL TARGET
+      </div>
+
+      <div class="countdown">
+        <span id="daysLeft">0</span>
+        DAYS
+      </div>
+
+      <div class="deadline">
+        Target · <strong>March 31, 2027</strong>
+      </div>
+
+      <div
+        class="hero-message"
+        id="message"
+      >
+        You don't need a perfect day.
+        You need another productive one.
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <div class="progress-header">
+
+        <div class="progress-title">
+          Preparation progress
+        </div>
+
+        <div
+          class="progress-value"
+          id="overallProgress"
+        >
+          0%
+        </div>
+
+      </div>
+
+      <div class="progress-bar">
+
+        <div
+          class="progress-fill"
+          id="overallFill"
+        ></div>
+
+      </div>
+
+      <div
+        class="progress-title"
+        style="margin-top:10px;"
+      >
+        LeetCode + Development
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     CONTENT
+========================= -->
+
+<div class="grid">
+
+
+
+<!-- =========================
+     TODAY
+========================= -->
+
+<section class="card">
+
+  <div class="card-header">
+
+    <div class="card-title">
+      Today
+    </div>
+
+    <div
+      class="card-meta"
+      id="todayCount"
+    >
+      0 / 2
+    </div>
+
+  </div>
+
+
+  <div class="tasks">
+
+
+    <div
+      class="task"
+      data-task="leetcode"
+    >
+
+      <div class="checkbox"></div>
+
+      <div class="task-info">
+
+        <div class="task-name">
+          LeetCode
+        </div>
+
+        <div class="task-sub">
+          DSA · solve + revise
+        </div>
+
+      </div>
+
+      <div class="task-time">
+        1h 15m
+      </div>
+
+    </div>
+
+
+
+    <div
+      class="task"
+      data-task="dev"
+    >
+
+      <div class="checkbox"></div>
+
+      <div class="task-info">
+
+        <div class="task-name">
+          Development
+        </div>
+
+        <div class="task-sub">
+          Learn + implement
+        </div>
+
+      </div>
+
+      <div class="task-time">
+        45m
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="today-progress">
+
+    <div class="small-progress">
+
+      <div
+        class="small-fill"
+        id="todayFill"
+      ></div>
+
+    </div>
+
+    <div
+      class="progress-text"
+      id="todayProgress"
+    >
+      Start today.
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     TOMORROW
+========================= -->
+
+<section class="card tomorrow">
+
+  <div class="card-header">
+
+    <div>
+
+      <div class="tomorrow-badge">
+        Tomorrow
+      </div>
+
+      <div
+        class="tomorrow-date"
+        id="tomorrowDate"
+      ></div>
+
+    </div>
+
+    <div class="card-meta">
+      Your next move
+    </div>
+
+  </div>
+
+
+  <textarea
+    id="nextInput"
+    class="next-input"
+    placeholder="Write what you will do tomorrow...
+
+Example:
+
+Finish binary search problems 4–6
+Implement debounce + throttle
+Learn Redis caching and build a small example"
+  ></textarea>
+
+
+  <div class="saved-text">
+    Saved automatically · Open this tomorrow and execute it.
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     WEEK
+========================= -->
+
+<section class="card">
+
+  <div class="card-header">
+
+    <div class="card-title">
+      This week
+    </div>
+
+    <div class="card-meta">
+      Execution
+    </div>
+
+  </div>
+
+
+  <div class="week-list">
+
+
+    <div class="week-row">
+
+      <div class="week-name">
+        LeetCode
+      </div>
+
+      <div class="week-bar">
+
+        <div
+          class="week-fill"
+          style="width:70%"
+        ></div>
+
+      </div>
+
+      <div class="week-number">
+        7 / 10
+      </div>
+
+    </div>
+
+
+
+    <div class="week-row">
+
+      <div class="week-name">
+        Development
+      </div>
+
+      <div class="week-bar">
+
+        <div
+          class="week-fill"
+          style="width:60%"
+        ></div>
+
+      </div>
+
+      <div class="week-number">
+        3 / 5
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     PROGRESS
+========================= -->
+
+<section class="card">
+
+  <div class="card-header">
+
+    <div class="card-title">
+      Your preparation
+    </div>
+
+    <div class="card-meta">
+      Update as you progress
+    </div>
+
+  </div>
+
+
+  <div class="week-list">
+
+
+    <div class="week-row">
+
+      <div class="week-name">
+        LeetCode
+      </div>
+
+      <div class="week-bar">
+
+        <div
+          class="week-fill"
+          style="width:70%"
+        ></div>
+
+      </div>
+
+      <div class="week-number">
+        70%
+      </div>
+
+    </div>
+
+
+
+    <div class="week-row">
+
+      <div class="week-name">
+        Development
+      </div>
+
+      <div class="week-bar">
+
+        <div
+          class="week-fill"
+          style="width:55%"
+        ></div>
+
+      </div>
+
+      <div class="week-number">
+        55%
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     ROADMAP
+========================= -->
+
+<section class="card full">
+
+  <div class="card-header">
+
+    <div class="card-title">
+      Road to SDE
+    </div>
+
+    <div class="card-meta">
+      March 31, 2027
+    </div>
+
+  </div>
+
+
+  <div class="roadmap">
+
+
+    <div class="milestone done">
+
+      <div class="milestone-dot">
+        ✓
+      </div>
+
+      <div class="milestone-name">
+        Restart<br>DSA
+      </div>
+
+    </div>
+
+
+
+    <div class="milestone done">
+
+      <div class="milestone-dot">
+        ✓
+      </div>
+
+      <div class="milestone-name">
+        DSA<br>Foundation
+      </div>
+
+    </div>
+
+
+
+    <div class="milestone current">
+
+      <div class="milestone-dot">
+        →
+      </div>
+
+      <div class="milestone-name">
+        Advanced<br>DSA
+      </div>
+
+    </div>
+
+
+
+    <div class="milestone">
+
+      <div class="milestone-dot">
+        4
+      </div>
+
+      <div class="milestone-name">
+        Dev<br>Depth
+      </div>
+
+    </div>
+
+
+
+    <div class="milestone">
+
+      <div class="milestone-dot">
+        5
+      </div>
+
+      <div class="milestone-name">
+        Strong<br>Projects
+      </div>
+
+    </div>
+
+
+
+    <div class="milestone">
+
+      <div class="milestone-dot">
+        6
+      </div>
+
+      <div class="milestone-name">
+        Interview<br>Ready
+      </div>
+
+    </div>
+
+
+
+    <div class="milestone">
+
+      <div class="milestone-dot">
+        ★
+      </div>
+
+      <div class="milestone-name">
+        SDE<br>Offer
+      </div>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     HEATMAP
+========================= -->
+
+<section class="card full">
+
+  <div class="card-header">
+
+    <div class="card-title">
+      Last 90 days
+    </div>
+
+    <div class="card-meta">
+      Consistency > intensity
+    </div>
+
+  </div>
+
+
+  <div
+    class="heatmap"
+    id="heatmap"
+  ></div>
+
+
+  <div class="legend">
+
+    <div class="legend-item">
+
+      <div class="legend-box"></div>
+
+      None
+
+    </div>
+
+
+    <div class="legend-item">
+
+      <div class="legend-box partial"></div>
+
+      Partial
+
+    </div>
+
+
+    <div class="legend-item">
+
+      <div class="legend-box full"></div>
+
+      Both done
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+  <div>
+    March 31, 2027 is the deadline.
+    Today is where you earn it.
+  </div>
+
+  <button
+    class="reset"
+    id="reset"
+  >
+    Reset all data
+  </button>
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================
+   CONFIG
+========================================= */
+
+const STORAGE_KEY = "road-to-sde-2027-v2";
+
+const TARGET_DATE =
+  new Date("2027-03-31T23:59:59");
+
+const TASKS = [
+  "leetcode",
+  "dev"
+];
+
+
+
+/* =========================================
+   STORAGE
+========================================= */
+
+function loadData() {
+
+  try {
+
+    const raw =
+      localStorage.getItem(STORAGE_KEY);
+
+    if (!raw) {
+
+      return {
+        days: {},
+        tomorrow: ""
+      };
+
+    }
+
+    const parsed =
+      JSON.parse(raw);
+
+    return {
+
+      days: parsed.days || {},
+
+      tomorrow:
+        parsed.tomorrow || ""
+
+    };
+
+  } catch {
+
+    return {
+      days: {},
+      tomorrow: ""
+    };
+
+  }
+
+}
+
+
+let data = loadData();
+
+
+
+function saveData() {
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(data)
+  );
+
+}
+
+
+
+/* =========================================
+   DATE HELPERS
+========================================= */
+
+function dateKey(date) {
+
+  const year =
+    date.getFullYear();
+
+  const month =
+    String(
+      date.getMonth() + 1
+    ).padStart(2, "0");
+
+  const day =
+    String(
+      date.getDate()
+    ).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+
+}
+
+
+
+function getDay(date) {
+
+  const key =
+    dateKey(date);
+
+  if (!data.days[key]) {
+
+    data.days[key] = {
+
+      leetcode: false,
+
+      dev: false
+
+    };
+
+  }
+
+  return data.days[key];
+
+}
+
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+function renderDate() {
+
+  const today =
+    new Date();
+
+  document.getElementById(
+    "todayDate"
+  ).textContent =
+    today.toLocaleDateString(
+      undefined,
+      {
+        weekday: "long",
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+      }
+    );
+
+
+  const tomorrow =
+    new Date();
+
+  tomorrow.setDate(
+    tomorrow.getDate() + 1
+  );
+
+
+  document.getElementById(
+    "tomorrowDate"
+  ).textContent =
+    tomorrow.toLocaleDateString(
+      undefined,
+      {
+        weekday: "long",
+        month: "short",
+        day: "numeric"
+      }
+    );
+
+}
+
+
+
+/* =========================================
+   COUNTDOWN
+========================================= */
+
+function renderCountdown() {
+
+  const diff =
+    TARGET_DATE - new Date();
+
+  const days =
+    Math.max(
+      0,
+      Math.ceil(
+        diff /
+        (1000 * 60 * 60 * 24)
+      )
+    );
+
+  document.getElementById(
+    "daysLeft"
+  ).textContent = days;
+
+}
+
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function renderMessage() {
+
+  const days =
+    Math.ceil(
+      (TARGET_DATE - new Date()) /
+      (1000 * 60 * 60 * 24)
+    );
+
+
+  let message;
+
+
+  if (days > 150) {
+
+    message =
+      "You have time. Build the foundation properly.";
+
+  }
+
+  else if (days > 90) {
+
+    message =
+      "The runway is shrinking. Keep stacking productive days.";
+
+  }
+
+  else if (days > 45) {
+
+    message =
+      "Execution mode. Close your weak areas.";
+
+  }
+
+  else if (days > 0) {
+
+    message =
+      "Final stretch. Trust the work you've put in.";
+
+  }
+
+  else {
+
+    message =
+      "Deadline reached. Keep going.";
+
+  }
+
+
+  document.getElementById(
+    "message"
+  ).textContent = message;
+
+}
+
+
+
+/* =========================================
+   TODAY
+========================================= */
+
+function renderToday() {
+
+  const today =
+    getDay(new Date());
+
+  let completed = 0;
+
+
+  TASKS.forEach(task => {
+
+    const element =
+      document.querySelector(
+        `.task[data-task="${task}"]`
+      );
+
+    const done =
+      !!today[task];
+
+
+    element.classList.toggle(
+      "done",
+      done
+    );
+
+
+    if (done)
+      completed++;
+
+  });
+
+
+  const percent =
+    (completed / TASKS.length) * 100;
+
+
+  document.getElementById(
+    "todayCount"
+  ).textContent =
+    `${completed} / 2`;
+
+
+  document.getElementById(
+    "todayFill"
+  ).style.width =
+    percent + "%";
+
+
+  let text =
+    "Start today.";
+
+
+  if (completed === 1)
+    text =
+      "One done. Finish the second.";
+
+
+  if (completed === 2)
+    text =
+      "Both done. Another day in the bank.";
+
+
+  document.getElementById(
+    "todayProgress"
+  ).textContent =
+    text;
+
+}
+
+
+
+/* =========================================
+   OVERALL PROGRESS
+========================================= */
+
+function renderOverall() {
+
+  /*
+    Update these manually as your
+    actual preparation improves.
+  */
+
+  const leetcode = 70;
+
+  const development = 55;
+
+
+  const overall =
+    (leetcode + development) / 2;
+
+
+  document.getElementById(
+    "overallProgress"
+  ).textContent =
+    Math.round(overall) + "%";
+
+
+  document.getElementById(
+    "overallFill"
+  ).style.width =
+    overall + "%";
+
+}
+
+
+
+/* =========================================
+   TOMORROW PLAN
+========================================= */
+
+const nextInput =
+  document.getElementById(
+    "nextInput"
+  );
+
+
+nextInput.value =
+  data.tomorrow || "";
+
+
+nextInput.addEventListener(
+  "input",
+  () => {
+
+    data.tomorrow =
+      nextInput.value;
+
+    saveData();
+
+  }
+);
+
+
+
+/* =========================================
+   TASK CLICK
+========================================= */
+
+document
+  .querySelectorAll(".task")
+  .forEach(task => {
+
+    task.addEventListener(
+      "click",
+      () => {
+
+        const taskName =
+          task.dataset.task;
+
+        const today =
+          getDay(new Date());
+
+        today[taskName] =
+          !today[taskName];
+
+        saveData();
+
+        renderToday();
+
+        renderHeatmap();
+
+      }
+    );
+
+  });
+
+
+
+/* =========================================
+   HEATMAP
+========================================= */
+
+function renderHeatmap() {
+
+  const container =
+    document.getElementById(
+      "heatmap"
+    );
+
+  container.innerHTML = "";
+
+
+  const today =
+    new Date();
+
+
+  for (
+    let i = 89;
+    i >= 0;
+    i--
+  ) {
+
+    const date =
+      new Date(today);
+
+    date.setDate(
+      date.getDate() - i
+    );
+
+
+    const entry =
+      data.days[
+        dateKey(date)
+      ];
+
+
+    const cell =
+      document.createElement(
+        "div"
+      );
+
+    cell.className =
+      "heat";
+
+
+    if (entry) {
+
+      const count =
+        TASKS.filter(
+          task => entry[task]
+        ).length;
+
+
+      if (
+        count === TASKS.length
+      ) {
+
+        cell.classList.add(
+          "full"
+        );
+
+      }
+
+      else if (count > 0) {
+
+        cell.classList.add(
+          "partial"
+        );
+
+      }
+
+    }
+
+
+    if (
+      dateKey(date) ===
+      dateKey(today)
+    ) {
+
+      cell.classList.add(
+        "today"
+      );
+
+    }
+
+
+    cell.title =
+      date.toLocaleDateString(
+        undefined,
+        {
+          month: "short",
+          day: "numeric"
+        }
+      );
+
+
+    container.appendChild(
+      cell
+    );
+
+  }
+
+}
+
+
+
+/* =========================================
+   RESET
+========================================= */
+
+document
+  .getElementById("reset")
+  .addEventListener(
+    "click",
+    () => {
+
+      const confirmed =
+        confirm(
+          "Reset all your progress and tomorrow's plan?"
+        );
+
+
+      if (!confirmed)
+        return;
+
+
+      data = {
+
+        days: {},
+
+        tomorrow: ""
+
+      };
+
+
+      saveData();
+
+
+      nextInput.value = "";
+
+
+      renderToday();
+
+      renderHeatmap();
+
+    }
+  );
+
+
+
+/* =========================================
+   INIT
+========================================= */
+
+renderDate();
+
+renderCountdown();
+
+renderMessage();
+
+renderOverall();
+
+renderToday();
+
+renderHeatmap();
+
+
+setInterval(
+  renderCountdown,
+  60 * 1000
+);
+
+
+setInterval(
+  renderMessage,
+  60 * 1000
+);
+
+</script>
+
+</body>
+</html>
