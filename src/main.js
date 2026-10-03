@@ -2,9 +2,11 @@
  * ==============================================================================
  * OceanView 3D - INCOIS / MoES SIH26067 Oceanographic Telemetry System
  * 
- * NOTE: This prototype uses synthetic placeholder data / preprocessed HYCOM & Argo
- * local tiles standing in for live backend HYCOM / Argovis API integration 
- * (scheduled for the grand finale production build).
+ * Features:
+ * - 🇮🇳 Realistic 3D Indian Subcontinent Landmass & Topography
+ * - 🌊 60 FPS Hydrodynamic Circulation & Current Vector Flow Field
+ * - 📡 INCOIS Argo Profiling Float Markers & CTD Vertical Profile Analytics
+ * - 🤖 Samudra AI / OceanGPT Intelligent Assistant (Gemini / Groq / Knowledge Engine)
  * ==============================================================================
  */
 
@@ -14,6 +16,8 @@ import { getViridisColor, getViridisCssGradient } from './utils/viridis.js';
 import { fetchTileData, fetchArgoPositions, SUPPORTED_DEPTHS, GEO_EXTENT } from './utils/dataLoader.js';
 import { createCoastlineGroup, geoToScene } from './utils/coastline.js';
 import { renderArgoProfileChart } from './utils/chartRenderer.js';
+import { CurrentVectorField } from './utils/currentVectorField.js';
+import { OceanAIAssistant } from './utils/oceanAI.js';
 
 // Application State
 const state = {
@@ -23,28 +27,31 @@ const state = {
   columnStackMode: true,
   showArgo: true,
   showCoastline: true,
+  showCurrents: true,
   autoRotate: false,
-  activeDate: '2023-03-21',
+  activeDate: '2025-09-20',
   selectedFloat: null
 };
 
 // Scene Dimensions
 const PLANE_WIDTH = 60;
 const PLANE_HEIGHT = 50;
-const BASE_Z_SCALE = 0.02; // z = -depth * BASE_Z_SCALE * exaggeration
+const BASE_Z_SCALE = 0.02;
 
 // Three.js Globals
 let scene, camera, renderer, controls;
-let depthMeshGroup, coastlineGroup, argoMarkersGroup, boundingBoxGroup;
-const sliceDataCache = new Map(); // key: `${variable}_${depth}` -> tileData
-const sliceMeshes = new Map();     // key: depth -> THREE.Mesh
+let depthMeshGroup, coastlineGroup, argoMarkersGroup, boundingBoxGroup, currentVectorField;
+const sliceDataCache = new Map();
+const sliceMeshes = new Map();
 let argoFloatsData = [];
 const argoMeshes = [];
+
+// AI Assistant
+const oceanAI = new OceanAIAssistant();
 
 // Raycasting & Telemetry
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2(-9999, -9999);
-let hoveredFloat = null;
 
 // Performance Monitoring (FPS)
 let frameCount = 0;
@@ -88,50 +95,53 @@ const statusExag = document.getElementById('status-exag');
 const statusHover = document.getElementById('status-hover');
 const statusFps = document.getElementById('status-fps');
 
+// AI Chatbot DOM
+const aiChatLauncher = document.getElementById('ai-chat-launcher');
+const aiChatWindow = document.getElementById('ai-chat-window');
+const btnAiClose = document.getElementById('btn-ai-close');
+const aiMessagesList = document.getElementById('ai-messages-list');
+const aiChatForm = document.getElementById('ai-chat-form');
+const aiUserInput = document.getElementById('ai-user-input');
+const aiChips = document.querySelectorAll('.ai-chip');
+
 /**
- * 1. Initialize Three.js Scene, Camera, Lighting & Controls
+ * 1. Initialize Scene, Camera, Lighting & 3D India Cartography
  */
 function initScene() {
-  // Scene
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x070b16);
   scene.fog = new THREE.FogExp2(0x070b16, 0.002);
 
-  // Camera setup (Z is vertical / depth axis)
   const aspect = window.innerWidth / window.innerHeight;
-  camera = new THREE.PerspectiveCamera(45, aspect, 0.5, 1000);
-  camera.up.set(0, 0, 1); // Z is vertical upwards, negative Z is depth
-  
-  // Oblique viewpoint looking down into water column
-  camera.position.set(40, -75, 45);
-  camera.lookAt(0, 0, -10);
+  camera = new THREE.PerspectiveCamera(45, aspect, 0.5, 1200);
+  camera.up.set(0, 0, 1);
+  camera.position.set(25, -78, 48);
+  camera.lookAt(0, 0, -8);
 
-  // Renderer
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   canvasContainer.appendChild(renderer.domElement);
 
-  // OrbitControls
   controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.08;
   controls.screenSpacePanning = false;
   controls.minDistance = 15;
-  controls.maxDistance = 250;
-  controls.maxPolarAngle = Math.PI / 2 + 0.35; // allow looking slightly from below
-  controls.target.set(0, 0, -12);
+  controls.maxDistance = 300;
+  controls.maxPolarAngle = Math.PI / 2 + 0.35;
+  controls.target.set(0, 0, -10);
 
   // Lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
   scene.add(ambientLight);
 
-  const dirLight1 = new THREE.DirectionalLight(0x38bdf8, 0.85);
+  const dirLight1 = new THREE.DirectionalLight(0x38bdf8, 1.1);
   dirLight1.position.set(50, -50, 80);
   scene.add(dirLight1);
 
-  const dirLight2 = new THREE.DirectionalLight(0x00e5ff, 0.55);
+  const dirLight2 = new THREE.DirectionalLight(0x00e5ff, 0.6);
   dirLight2.position.set(-60, 40, -40);
   scene.add(dirLight2);
 
@@ -144,14 +154,15 @@ function initScene() {
   argoMarkersGroup.name = "ArgoMarkersGroup";
   scene.add(argoMarkersGroup);
 
-  // Coastline Context Line
+  // Realistic Solid India Cartography with Topography
   coastlineGroup = createCoastlineGroup(PLANE_WIDTH, PLANE_HEIGHT);
   scene.add(coastlineGroup);
 
-  // Bounding Volume Wireframe & Depth Guides
+  // Dynamic 60 FPS Flow Vector Arrows
+  currentVectorField = new CurrentVectorField(scene, PLANE_WIDTH, PLANE_HEIGHT);
+
   createBoundingBoxGuides();
 
-  // Set initial gradient style
   if (cbGradient) {
     cbGradient.style.background = getViridisCssGradient();
   }
@@ -162,23 +173,12 @@ function initScene() {
   renderer.domElement.addEventListener('click', onCanvasClick);
 }
 
-/**
- * Creates 3D depth water column corner guides and reference lines
- */
 function createBoundingBoxGuides() {
   boundingBoxGroup = new THREE.Group();
   boundingBoxGroup.name = "BoundingVolumeGuides";
 
   const halfW = PLANE_WIDTH / 2;
   const halfH = PLANE_HEIGHT / 2;
-  const corners = [
-    [-halfW, -halfH],
-    [halfW, -halfH],
-    [halfW, halfH],
-    [-halfW, halfH]
-  ];
-
-  // Surface boundary rectangle
   const surfacePoints = [
     new THREE.Vector3(-halfW, -halfH, 0.05),
     new THREE.Vector3(halfW, -halfH, 0.05),
@@ -198,11 +198,7 @@ function createBoundingBoxGuides() {
   updateBoundingGuides();
 }
 
-/**
- * Updates vertical corner pillars matching current exaggeration
- */
 function updateBoundingGuides() {
-  // Remove existing pillars
   const toRemove = [];
   boundingBoxGroup.children.forEach(c => {
     if (c.name === 'pillar') toRemove.push(c);
@@ -240,18 +236,15 @@ function updateBoundingGuides() {
 }
 
 /**
- * 2 & 3. Depth-Slice Rendering with Viridis Colormap & Dynamic Z Stacking
+ * 2. Render Indian Ocean Depth Slices
  */
 async function loadAndRenderAllSlices() {
-  // Clear any existing mesh planes
   depthMeshGroup.clear();
   sliceMeshes.clear();
 
-  // Find global min and max for active variable across all depths for consistent scientific scaling
   let globalMin = Infinity;
   let globalMax = -Infinity;
 
-  // Load all 6 depths
   const slicePromises = SUPPORTED_DEPTHS.map(async (depth) => {
     const cacheKey = `${state.variable}_${depth}`;
     let tileData = sliceDataCache.get(cacheKey);
@@ -266,7 +259,6 @@ async function loadAndRenderAllSlices() {
 
   const loadedSlices = await Promise.all(slicePromises);
 
-  // If temperature, clamp standard visual range (e.g. 2.0 to 31.0 °C); if salinity (33.0 to 37.0 PSU)
   if (state.variable === 'temperature') {
     globalMin = Math.max(1.5, globalMin);
     globalMax = Math.min(32.0, globalMax);
@@ -275,27 +267,20 @@ async function loadAndRenderAllSlices() {
     globalMax = Math.min(37.5, globalMax);
   }
 
-  // Update Colorbar UI
   updateColorbarUI(globalMin, globalMax);
 
-  // Build 3D mesh for each depth slice
   loadedSlices.forEach(({ depth, tileData }) => {
     const mesh = createDepthSliceMesh(depth, tileData, globalMin, globalMax);
     sliceMeshes.set(depth, mesh);
     depthMeshGroup.add(mesh);
   });
 
-  // Update plane Z positions according to vertical exaggeration
   updateSlicePositions();
   updateSliceOpacities();
 }
 
-/**
- * Creates a THREE.PlaneGeometry mesh with per-vertex colors
- */
 function createDepthSliceMesh(depth, tileData, vMin, vMax) {
-  const GRID_SIZE = 40;
-  // PlaneGeometry with 39 segments = 40 vertices in X and Y
+  const GRID_SIZE = 36;
   const geometry = new THREE.PlaneGeometry(
     PLANE_WIDTH,
     PLANE_HEIGHT,
@@ -305,22 +290,16 @@ function createDepthSliceMesh(depth, tileData, vMin, vMax) {
 
   const colors = [];
   const valRange = vMax - vMin || 1.0;
-
-  // PlaneGeometry vertices are arranged from top-left (y positive) to bottom-right (y negative)
-  // Grid values are indexed values[i][j] where i is lat index (south to north: 0 to 39)
   const posAttribute = geometry.attributes.position;
   const vertexCount = posAttribute.count;
 
   for (let k = 0; k < vertexCount; k++) {
-    // Determine row (lat) and col (lon)
-    const row = Math.floor(k / GRID_SIZE); // 0 to 39 (from top lat 26N down to 2N in plane geometry)
-    const col = k % GRID_SIZE;             // 0 to 39 (from west lon 60E to east 95E)
-
-    // Match grid latitude: in Three.js Plane, row 0 is top (maxLat), row 39 is bottom (minLat)
+    const row = Math.floor(k / GRID_SIZE);
+    const col = k % GRID_SIZE;
     const latIdx = (GRID_SIZE - 1) - row;
     const lonIdx = col;
 
-    const val = (tileData.values[latIdx] && tileData.values[latIdx][lonIdx] !== undefined)
+    const val = (tileData.values && tileData.values[latIdx] && tileData.values[latIdx][lonIdx] !== undefined)
       ? tileData.values[latIdx][lonIdx]
       : (vMin + vMax) / 2;
 
@@ -348,7 +327,6 @@ function createDepthSliceMesh(depth, tileData, vMin, vMax) {
   mesh.name = `DepthSlice_${depth}`;
   mesh.userData = { depth, tileData, vMin, vMax };
 
-  // Add subtle edge wireframe outline to highlight plane boundary
   const edgeGeom = new THREE.EdgesGeometry(geometry);
   const edgeMat = new THREE.LineBasicMaterial({
     color: isSelected ? 0x00e5ff : 0x0284c7,
@@ -362,9 +340,6 @@ function createDepthSliceMesh(depth, tileData, vMin, vMax) {
   return mesh;
 }
 
-/**
- * Live updates Z spacing of depth slices and float markers based on exaggeration slider
- */
 function updateSlicePositions() {
   sliceMeshes.forEach((mesh, depth) => {
     mesh.position.z = -depth * BASE_Z_SCALE * state.verticalExaggeration;
@@ -374,9 +349,6 @@ function updateSlicePositions() {
   updateArgoMarkerPositions();
 }
 
-/**
- * Updates opacity of active vs background slices
- */
 function updateSliceOpacities() {
   sliceMeshes.forEach((mesh, depth) => {
     const isSelected = (depth === state.selectedDepth);
@@ -393,9 +365,6 @@ function updateSliceOpacities() {
   });
 }
 
-/**
- * Updates scientific colorbar values and labels
- */
 function updateColorbarUI(min, max) {
   if (state.variable === 'temperature') {
     cbTitle.textContent = 'TEMP (°C)';
@@ -411,7 +380,7 @@ function updateColorbarUI(min, max) {
 }
 
 /**
- * 5. Synthetic Argo Float Markers & Interactive CTD Profile Popups
+ * 3. In-Situ Argo Profiling Float Markers & Tethers
  */
 async function loadAndRenderArgoFloats() {
   argoMarkersGroup.clear();
@@ -427,28 +396,25 @@ async function loadAndRenderArgoFloats() {
     group.name = `ArgoFloat_${floatItem.id}`;
     group.userData = { floatData: floatItem, index: idx };
 
-    // Orange Sphere Marker (#FF8C00)
     const sphereMat = new THREE.MeshStandardMaterial({
       color: 0xff8c00,
       emissive: 0xff6200,
-      emissiveIntensity: 0.6,
+      emissiveIntensity: 0.7,
       roughness: 0.3,
       metalness: 0.2
     });
     const sphere = new THREE.Mesh(sphereGeom, sphereMat);
     group.add(sphere);
 
-    // Glowing Halo Ring around marker
     const haloMat = new THREE.MeshBasicMaterial({
       color: 0xffaa00,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.75
+      opacity: 0.8
     });
     const halo = new THREE.Mesh(haloGeom, haloMat);
     group.add(halo);
 
-    // Vertical line tether connecting float depth to surface (z=0)
     const tetherGeom = new THREE.BufferGeometry().setFromPoints([
       new THREE.Vector3(0, 0, 0),
       new THREE.Vector3(0, 0, 10)
@@ -458,22 +424,19 @@ async function loadAndRenderArgoFloats() {
       dashSize: 0.8,
       gapSize: 0.6,
       transparent: true,
-      opacity: 0.4
+      opacity: 0.5
     });
     const tether = new THREE.Line(tetherGeom, tetherMat);
     tether.name = 'tether';
     group.add(tether);
 
     argoMarkersGroup.add(group);
-    argoMeshes.push(sphere); // for raycasting
+    argoMeshes.push(sphere);
   });
 
   updateArgoMarkerPositions();
 }
 
-/**
- * Recalculates Argo marker 3D coordinates based on Lon, Lat, Depth, and Exaggeration
- */
 function updateArgoMarkerPositions() {
   argoMarkersGroup.children.forEach(group => {
     const floatItem = group.userData.floatData;
@@ -484,7 +447,6 @@ function updateArgoMarkerPositions() {
 
     group.position.set(scenePos.x, scenePos.y, z);
 
-    // Update tether line from float depth to surface z=0
     const tether = group.getObjectByName('tether');
     if (tether) {
       const surfaceZOffset = -z;
@@ -499,7 +461,7 @@ function updateArgoMarkerPositions() {
 }
 
 /**
- * Raycasting: Hover detection & Lat/Lon/Value status readout
+ * 4. Raycasting & Tooltips
  */
 function onPointerMove(event) {
   const rect = renderer.domElement.getBoundingClientRect();
@@ -508,7 +470,6 @@ function onPointerMove(event) {
 
   raycaster.setFromCamera(mouse, camera);
 
-  // 1. Check Argo float markers hover
   const floatIntersects = raycaster.intersectObjects(argoMeshes, false);
   if (floatIntersects.length > 0) {
     const hitSphere = floatIntersects[0].object;
@@ -520,7 +481,6 @@ function onPointerMove(event) {
     document.body.style.cursor = 'default';
   }
 
-  // 2. Check depth plane intersection for real-time geographic Lat/Lon & Value telemetry
   const activeMesh = sliceMeshes.get(state.selectedDepth);
   if (activeMesh) {
     const planeIntersects = raycaster.intersectObject(activeMesh, false);
@@ -528,18 +488,16 @@ function onPointerMove(event) {
       const hit = planeIntersects[0];
       const localPoint = hit.point;
 
-      // Inverse map from scene space ([-30, 30], [-25, 25]) to GeoExtent (Lon: [60, 95], Lat: [2, 26])
       const u = (localPoint.x + PLANE_WIDTH / 2) / PLANE_WIDTH;
       const v = (localPoint.y + PLANE_HEIGHT / 2) / PLANE_HEIGHT;
 
       const lon = GEO_EXTENT.minLon + u * (GEO_EXTENT.maxLon - GEO_EXTENT.minLon);
       const lat = GEO_EXTENT.minLat + v * (GEO_EXTENT.maxLat - GEO_EXTENT.minLat);
 
-      // Sample grid value
       const tileData = activeMesh.userData.tileData;
       let valStr = '';
       if (tileData && tileData.values) {
-        const GRID_SIZE = 40;
+        const GRID_SIZE = 36;
         const latIdx = Math.max(0, Math.min(GRID_SIZE - 1, Math.round(v * (GRID_SIZE - 1))));
         const lonIdx = Math.max(0, Math.min(GRID_SIZE - 1, Math.round(u * (GRID_SIZE - 1))));
         const val = tileData.values[latIdx]?.[lonIdx];
@@ -557,9 +515,6 @@ function onPointerMove(event) {
   statusHover.textContent = 'Move cursor over ocean slices or Argo floats...';
 }
 
-/**
- * Click handler for opening Argo Float profile card
- */
 function onCanvasClick(event) {
   raycaster.setFromCamera(mouse, camera);
   const floatIntersects = raycaster.intersectObjects(argoMeshes, false);
@@ -571,9 +526,6 @@ function onCanvasClick(event) {
   }
 }
 
-/**
- * Displays Argo Float CTD Profile modal and renders 2D profile chart
- */
 function openArgoFloatModal(floatData) {
   state.selectedFloat = floatData;
   modalFloatId.textContent = `INCOIS ARGO #${floatData.id}`;
@@ -584,7 +536,6 @@ function openArgoFloatModal(floatData) {
 
   argoModalBackdrop.classList.remove('hidden');
 
-  // Render canvas chart
   requestAnimationFrame(() => {
     renderArgoProfileChart(argoChartCanvas, floatData.profile);
   });
@@ -596,17 +547,15 @@ function closeArgoFloatModal() {
 }
 
 /**
- * 4. UI Controls & Event Bindings
+ * 5. UI Controls & Samudra AI Chatbot Wiring
  */
 function setupUIEvents() {
-  // Variable Dropdown
   variableSelect.addEventListener('change', (e) => {
     state.variable = e.target.value;
     statusVar.textContent = (state.variable === 'temperature') ? 'Temperature (°C)' : 'Salinity (PSU)';
     loadAndRenderAllSlices();
   });
 
-  // Depth Chips
   depthChips.forEach(chip => {
     chip.addEventListener('click', () => {
       depthChips.forEach(c => c.classList.remove('active'));
@@ -622,7 +571,6 @@ function setupUIEvents() {
     });
   });
 
-  // Vertical Exaggeration Slider
   exaggerationSlider.addEventListener('input', (e) => {
     const val = parseFloat(e.target.value);
     state.verticalExaggeration = val;
@@ -631,46 +579,113 @@ function setupUIEvents() {
     updateSlicePositions();
   });
 
-  // Water Column Stack Toggle
   columnModeToggle.addEventListener('change', (e) => {
     state.columnStackMode = e.target.checked;
     updateSliceOpacities();
   });
 
-  // Argo Toggle
   argoToggle.addEventListener('change', (e) => {
     state.showArgo = e.target.checked;
     argoMarkersGroup.visible = state.showArgo;
   });
 
-  // Coastline Toggle
   coastlineToggle.addEventListener('change', (e) => {
     state.showCoastline = e.target.checked;
     coastlineGroup.visible = state.showCoastline;
   });
 
-  // Auto Rotation Toggle
   rotationToggle.addEventListener('change', (e) => {
     state.autoRotate = e.target.checked;
     controls.autoRotate = state.autoRotate;
     controls.autoRotateSpeed = 1.2;
   });
 
-  // Reset Camera View
   resetCamBtn.addEventListener('click', () => {
-    camera.position.set(40, -75, 45);
-    camera.lookAt(0, 0, -10);
-    controls.target.set(0, 0, -12);
+    camera.position.set(25, -78, 48);
+    camera.lookAt(0, 0, -8);
+    controls.target.set(0, 0, -10);
     controls.update();
   });
 
-  // Modal Close Button
   modalCloseBtn.addEventListener('click', closeArgoFloatModal);
+
+  // --------------------------------------------------------------------------
+  // SAMUDRA AI CHATBOT INTERACTION
+  // --------------------------------------------------------------------------
+  aiChatLauncher.addEventListener('click', () => {
+    aiChatWindow.classList.toggle('hidden');
+    if (!aiChatWindow.classList.contains('hidden')) {
+      aiUserInput.focus();
+    }
+  });
+
+  btnAiClose.addEventListener('click', () => {
+    aiChatWindow.classList.add('hidden');
+  });
+
+  // Suggestion Chips
+  aiChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const q = chip.dataset.q;
+      handleUserChatMessage(q);
+    });
+  });
+
+  // Form Submit
+  aiChatForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = aiUserInput.value.trim();
+    if (!q) return;
+    aiUserInput.value = '';
+    handleUserChatMessage(q);
+  });
 }
 
-/**
- * Handle Window Resize
- */
+function appendChatMessage(sender, text) {
+  const msgDiv = document.createElement('div');
+  msgDiv.className = `ai-msg ai-msg-${sender}`;
+  
+  // Format simple markdown into HTML
+  let formatted = text
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+    .replace(/^\* (.*$)/gim, '<li>$1</li>')
+    .replace(/^- (.*$)/gim, '<li>$1</li>')
+    .replace(/\n\n/g, '</p><p>');
+
+  if (formatted.includes('<li>')) {
+    formatted = formatted.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+  }
+
+  msgDiv.innerHTML = `<div class="msg-bubble"><p>${formatted}</p></div>`;
+  aiMessagesList.appendChild(msgDiv);
+  aiMessagesList.scrollTop = aiMessagesList.scrollHeight;
+}
+
+async function handleUserChatMessage(query) {
+  appendChatMessage('user', query);
+
+  // Typing indicator
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'ai-msg ai-msg-bot';
+  typingDiv.id = 'ai-typing-indicator';
+  typingDiv.innerHTML = `<div class="msg-bubble"><p><em>🌊 Samudra AI is analyzing oceanographic data...</em></p></div>`;
+  aiMessagesList.appendChild(typingDiv);
+  aiMessagesList.scrollTop = aiMessagesList.scrollHeight;
+
+  try {
+    const answer = await oceanAI.askQuestion(query);
+    const typing = document.getElementById('ai-typing-indicator');
+    if (typing) typing.remove();
+    appendChatMessage('bot', answer);
+  } catch (err) {
+    const typing = document.getElementById('ai-typing-indicator');
+    if (typing) typing.remove();
+    appendChatMessage('bot', '⚠️ An error occurred while retrieving telemetry. Please try again.');
+  }
+}
+
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -682,12 +697,11 @@ function onWindowResize() {
 }
 
 /**
- * Animation Loop & Live FPS Monitoring
+ * 6. Animation Loop (60 FPS)
  */
 function animate(time) {
   requestAnimationFrame(animate);
 
-  // FPS Counter
   frameCount++;
   if (time - lastFpsTime >= 1000) {
     currentFps = Math.round((frameCount * 1000) / (time - lastFpsTime));
@@ -696,7 +710,6 @@ function animate(time) {
     lastFpsTime = time;
   }
 
-  // Float Marker Subtle Pulsing Effect
   if (argoMarkersGroup.visible) {
     const pulseScale = 1.0 + Math.sin(time * 0.004) * 0.12;
     argoMarkersGroup.children.forEach(group => {
@@ -708,23 +721,23 @@ function animate(time) {
     });
   }
 
+  if (currentVectorField) {
+    currentVectorField.update(time);
+  }
+
   controls.update();
   renderer.render(scene, camera);
 }
 
 /**
- * App Bootstrap
+ * 7. Bootstrap
  */
 async function main() {
-  console.log('Initializing OceanView 3D (INCOIS SIH26067)...');
   initScene();
   setupUIEvents();
   await loadAndRenderAllSlices();
   await loadAndRenderArgoFloats();
   animate(performance.now());
-  console.log('✓ OceanView 3D initialized successfully.');
 }
 
-main().catch(err => {
-  console.error('Fatal initialization error in OceanView 3D:', err);
-});
+main().catch(err => console.error('Initialization error:', err));

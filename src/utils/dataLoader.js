@@ -55,7 +55,7 @@ export function generateSyntheticTile(variable = 'temperature', depth = 0, date 
   // Realistic Oceanographic physics for North Indian Ocean
   // 1. Temperature: Surface ~28°C-30°C in tropics, dropping down to ~2.5°C at 2000m (thermocline)
   // 2. Salinity: Arabian Sea (west) high ~36.5 PSU (high evaporation), Bay of Bengal (east) ~33.0 PSU (Ganges/Brahmaputra runoff)
-  
+
   let baseVal, rangeVal;
   if (variable === 'temperature') {
     // Thermocline curve: Surface (28C) -> 100m (23C) -> 200m (16C) -> 500m (10C) -> 1000m (6C) -> 2000m (2.5C)
@@ -132,19 +132,19 @@ export function generateSyntheticArgoFloats(date = '2023-03-21') {
     { id: "2902150", lat: 14.5, lon: 67.8, depth: 420 },
     { id: "2902151", lat: 18.2, lon: 70.1, depth: 850 },
     { id: "2902152", lat: 11.0, lon: 65.5, depth: 150 },
-    { id: "2902153", lat: 7.5,  lon: 72.3, depth: 1200 },
+    { id: "2902153", lat: 7.5, lon: 72.3, depth: 1200 },
     { id: "2902154", lat: 16.8, lon: 86.4, depth: 310 },
     { id: "2902155", lat: 13.2, lon: 83.9, depth: 680 },
-    { id: "2902156", lat: 9.4,  lon: 88.2, depth: 1450 },
-    { id: "2902157", lat: 5.1,  lon: 80.5, depth: 950 },
+    { id: "2902156", lat: 9.4, lon: 88.2, depth: 1450 },
+    { id: "2902157", lat: 5.1, lon: 80.5, depth: 950 },
     { id: "2902158", lat: 21.0, lon: 66.8, depth: 180 },
     { id: "2902159", lat: 19.5, lon: 87.5, depth: 520 },
-    { id: "2902160", lat: 8.8,  lon: 76.2, depth: 75 },
+    { id: "2902160", lat: 8.8, lon: 76.2, depth: 75 },
     { id: "2902161", lat: 12.0, lon: 74.0, depth: 290 },
     { id: "2902162", lat: 15.0, lon: 89.5, depth: 1100 },
-    { id: "2902163", lat: 4.2,  lon: 63.5, depth: 1380 },
+    { id: "2902163", lat: 4.2, lon: 63.5, depth: 1380 },
     { id: "2902164", lat: 17.5, lon: 72.8, depth: 480 },
-    { id: "2902165", lat: 6.8,  lon: 85.0, depth: 820 },
+    { id: "2902165", lat: 6.8, lon: 85.0, depth: 820 },
     { id: "2902166", lat: 10.5, lon: 92.0, depth: 610 },
     { id: "2902167", lat: 22.8, lon: 68.2, depth: 110 }
   ];
